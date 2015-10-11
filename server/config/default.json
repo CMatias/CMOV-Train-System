@@ -1,0 +1,16 @@
+{
+  "server": {
+    "host": "localhost",
+    "port": 8000
+  },
+  "database": {
+    "name": "default",
+    "username": "admin",
+    "password": "password",
+    "options": {
+      "dialect": "postgres",
+      "host": "localhost",
+      "port": 5432
+    }
+  }
+}
