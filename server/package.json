@@ -1,32 +1,27 @@
 {
-  "name": "cmov_p1_train_ticket_system",
+  "name": "cmov-p1-trainticketsystem",
   "version": "0.0.1",
-  "description": "Server side of the 1st project of the CMOV course of the 5th year of the MIEIC degree of FEUP.",
+  "description": "cmov-p1-restapi",
   "main": "server.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \"No Test Specified.\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://bitbucket.org/cmatias/cmov.git"
   },
   "keywords": [
+    "cmov",
     "node",
-    "hapi",
-    "sequelize",
-    "train",
-    "ticket",
-    "system"
+    "train"
   ],
-  "author": "Carlos Matias",
+  "author": "Carlos Matias, Gonçalo Lobo",
   "license": "ISC",
   "homepage": "https://bitbucket.org/cmatias/cmov#readme",
   "dependencies": {
-    "config": "^1.16.0",
-    "hapi": "^10.4.1",
-    "nodemon": "^1.7.1",
-    "pg": "^4.4.2",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^3.11.0"
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.11",
+    "nodemon": "^1.7.1"
   }
 }

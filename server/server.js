@@ -1,14 +1,19 @@
-var Hapi = require('hapi'),
-    serverConfig = require('config').server;
+var express = require('express');                        
+var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var User = require('./models/user');
+var routes = require('./routes');
 
-// Create a server with a host and port
-var server = new Hapi.Server();
-server.connection(serverConfig);
+var app = express(); 
 
-// Routes
-require('./routes')(server);
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// Start the server
-server.start(function () {
-    console.log("Server started at:", server.info.uri);
-});
+var port = process.env.PORT || 1337;        
+
+app.use(routes);
+
+app.listen(port);
+console.log('Magic happens on port ' + port);
+
+mongoose.connect('mongodb://admin:password@ds033754.mongolab.com:33754/cmov-p1');
