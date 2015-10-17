@@ -1,7 +1,6 @@
 var express = require('express');                        
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var routes = require('./routes');
 var passport = require('passport');
 
 var app = express(); 
@@ -14,7 +13,8 @@ var port = process.env.PORT || 1337;
 // Use the passport package in our application
 app.use(passport.initialize());
 
-app.use(routes);
+app.use('/api', require('./routes'));
+
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
