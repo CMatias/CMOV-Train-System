@@ -9,16 +9,16 @@ router.use(function (req, res, next) {
 });
 
 router.get('/', authController.isAuthenticated, function (req, res) {
-    res.json({message: 'hooray! welcome to our api!'});
+    res.json(authController.isAuthenticated, {message: 'hooray! welcome to our api!'});
 });
 
-router.route('/passenger')
+router.route('/passengers')
     .get(passengerController.getPassengers)
     .post(passengerController.postPassenger);
 
-router.route('/passenger/:passenger_id')
-    .get(passengerController.getPassenger)
-    .put(passengerController.putPassenger)
-    .delete(passengerController.deletePassenger);
+router.route('/passengers/:passenger_id')
+    .get(authController.isAuthenticated, passengerController.getPassenger)
+    .put(authController.isAuthenticated, passengerController.putPassenger)
+    .delete(authController.isAuthenticated, passengerController.deletePassenger);
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 var Passenger = require('../models/passenger');
 
 exports.getPassengers = function(req, res) {

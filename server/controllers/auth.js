@@ -8,22 +8,22 @@ passport.use(new BasicStrategy(
             if (err) { return callback(err); }
 
             // No passenger found with that username
-            if (!passenger) { return callback(null, false); }
+            if (!passenger) {
+                return callback(null, false);
+            }
 
-            return callback(null, passenger);
-
-            /*
             // Make sure the password is correct
              passenger.verifyPassword(password, function(err, isMatch) {
                 if (err) { return callback(err); }
 
                 // Password did not match
-                if (!isMatch) { return callback(null, false); }
+                if (!isMatch) {
+                    return callback(null, false);
+                }
 
                 // Success
                 return callback(null, passenger);
             });
-            */
         });
     }
 ));
