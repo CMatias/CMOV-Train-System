@@ -6,16 +6,16 @@ var PassengerSchema = new Schema({
     username: {
         type: String,
         unique: true,
-        required: 'Username is required'
+        required: 'A Passenger must have an username.'
     },
     email: {
         type: String,
         unique: true,
-        required: 'Email address is required'
+        required: 'A Passenger must have an email.'
     },
     password: { 
         type: String, 
-        required: 'Password is required',
+        required: 'A Passenger must have a password.',
     },
     creditcard: {
         type: {

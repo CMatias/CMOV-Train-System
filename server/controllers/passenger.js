@@ -61,7 +61,7 @@ exports.deletePassenger = function(req, res) {
         if (err) {
             res.send(err);
         }
-        res.json({ message: 'Successfully deleted passenger.' });
+        res.json({ message: 'Passenger successfully deleted.' });
     });
 };
 
