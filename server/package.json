@@ -23,6 +23,7 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "mongoose": "^4.1.11",
+    "node-mongoose-fixtures": "^0.2.4",
     "nodemon": "^1.7.1",
     "passport": "^0.3.0",
     "passport-http": "^0.3.0"

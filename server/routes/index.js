@@ -28,18 +28,18 @@ router.route('/passengers/:passenger_id')
 
 //Ticket Routes
 router.route('/ticket')
-    .get(ticketController.getTickets())
-    .post(ticketController.postTicket());
+    .get(ticketController.getTickets)
+    .post(ticketController.postTicket);
 
 router.route('/ticket/:ticket_id')
-    .get(authController.isAuthenticated, ticketController.getTicket())
-    .put(authController.isAuthenticated, ticketController.putTicket())
-    .delete(authController.isAuthenticated, ticketController.deleteTicket());
+    .get(authController.isAuthenticated, ticketController.getTicket)
+    .put(authController.isAuthenticated, ticketController.putTicket)
+    .delete(authController.isAuthenticated, ticketController.deleteTicket);
 
 //Trip Routes
 router.route('/trip')
-    .get(tripController.getTrips())
-    .post(tripController.postTrip());
+    .get(tripController.getTrips)
+    .post(tripController.postTrip);
 
 router.route('/trip/:trip_id')
     .get(authController.isAuthenticated, tripController.getTrip)
@@ -48,12 +48,12 @@ router.route('/trip/:trip_id')
 
 //Station Routes
 router.route('/station')
-    .get(stationController.getStations())
-    .post(stationController.postStation());
+    .get(stationController.getStations)
+    .post(stationController.postStation);
 
-router.route('/passengers/:passenger_id')
-    .get(authController.isAuthenticated, stationController.getStation())
-    .put(authController.isAuthenticated, stationController.putStation())
-    .delete(authController.isAuthenticated, stationController.deleteStation());
+router.route('/station/:station_id')
+    .get(authController.isAuthenticated, stationController.getStation)
+    .put(authController.isAuthenticated, stationController.putStation)
+    .delete(authController.isAuthenticated, stationController.deleteStation);
 
 module.exports = router;
