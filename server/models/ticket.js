@@ -10,11 +10,12 @@ var TicketSchema = new Schema({
         type: Number,
         required: 'A Ticket must have a seat'
     },
-    _passengerId: {
+    _passenger: {
         type: Schema.Types.ObjectId,
-        required: 'A Ticket must be assigned to a passenger.'
+        required: 'A Ticket must be assigned to a passenger.',
+        ref: 'Passenger'
     },
-    _tripId: {
+    _trip: {
         type: Schema.Types.ObjectId,
         required: 'A Ticket must be assigned to trip.',
         ref: 'Trip'

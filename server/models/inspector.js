@@ -16,7 +16,7 @@ var InspectorSchema = new Schema({
         type: String, 
         required: 'An Inspector must have a password.',
     },
-    _tripIds: [{ type: Schema.Types.ObjectId, ref: 'Trip' }]
+    _trips: [{ type: Schema.Types.ObjectId, ref: 'Trip' }]
 });
 
 // Execute before each passenger.save() call

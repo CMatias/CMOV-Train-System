@@ -21,50 +21,50 @@ module.exports = function(fixtures) {
             {
                 "price": "4.50",
                 "seat": "98",
-                "_passengerId": p1Id,
-                "_tripId": t1_A_CS
+                "_passenger": p1Id,
+                "_trip": t1_A_CS
             },
             {
                 "price": "5.50",
                 "seat": "98",
-                "_passengerId": p1Id,
-                "_tripId": t1_CS_B
+                "_passenger": p1Id,
+                "_trip": t1_CS_B
             },
             {
                 "price": "5.50",
                 "seat": "56",
-                "_passengerId": p1Id,
-                "_tripId": t2_B_CS
+                "_passenger": p1Id,
+                "_trip": t2_B_CS
             },
             {
                 "price": "4.50",
                 "seat": "56",
-                "_passengerId": p1Id,
-                "_tripId": t2_CS_A
+                "_passenger": p1Id,
+                "_trip": t2_CS_A
             },
             {
                 "price": "5.50",
                 "seat": "44",
-                "_passengerId": p2Id,
-                "_tripId": t2_B_CS
+                "_passenger": p2Id,
+                "_trip": t2_B_CS
             },
             {
                 "price": "6.00",
                 "seat": "44",
-                "_passengerId": p3Id,
-                "_tripId": t3_C_CS
+                "_passenger": p3Id,
+                "_trip": t3_C_CS
             },
             {
                 "price": "6.00",
                 "seat": "101",
-                "_passengerId": p3Id,
-                "_tripId": t4_CS_C
+                "_passenger": p3Id,
+                "_trip": t4_CS_C
             },
             {
                 "price": "5.00",
                 "seat": "22",
-                "_passengerId": p1Id,
-                "_tripId": t1_CS_B
+                "_passenger": p1Id,
+                "_trip": t1_CS_B
             }
         ]
     });

@@ -16,19 +16,19 @@ module.exports = function(fixtures) {
                 "username": "PeterGrey",
                 "email": "pgrey@gmail.com",
                 "password": "pgrey1234",
-                "_tripIds": [t1_A_CS, t1_CS_B]
+                "_trips": [t1_A_CS, t1_CS_B]
             },
             {
                 "username": "AlexLee",
                 "email": "alee@gmail.com",
                 "password": "alee1234",
-                "_tripIds": [t2_B_CS, t2_CS_A]
+                "_trips": [t2_B_CS, t2_CS_A]
             },
             {
                 "username": "MarcDom",
                 "email": "mdom@gmail.com",
                 "password": "mdom1234",
-                "_tripIds": [t3_C_CS, t4_CS_C]
+                "_trips": [t3_C_CS, t4_CS_C]
             }
         ]
     });
