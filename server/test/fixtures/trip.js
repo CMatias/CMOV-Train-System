@@ -1,380 +1,386 @@
 module.exports = function(fixtures) {
+    var today = new Date();
+    var tomorrow = new Date(); tomorrow.setDate(today.getDate() + 1);
+    var aftertomorrow = new Date(); aftertomorrow.setDate(tomorrow.getDate() + 1);
+
     fixtures.save('Trip', {
         Trip: [
             {
-                "departure": "November 10, 2015 8:00",
-                "arrival": "November 10, 2015 9:45",
+                "departure": today.setHours(8, 0, 0),
+                "arrival": today.setHours(9, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 9:45",
-                "arrival": "November 10, 2015 11:30",
+                "departure": today.setHours(9, 45, 0),
+                "arrival": today.setHours(11, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 10, 2015 8:30",
-                "arrival": "November 10, 2015 10:15",
+                "departure": today.setHours(8, 30, 0),
+                "arrival": today.setHours(10, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 10:15",
-                "arrival": "November 10, 2015 12:00",
+                "departure": today.setHours(10, 15, 0),
+                "arrival": today.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 10, 2015 12:00",
-                "arrival": "November 10, 2015 13:45",
+                "departure": today.setHours(12, 0, 0),
+                "arrival": today.setHours(13, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 13:45",
-                "arrival": "November 10, 2015 15:30",
+                "departure": today.setHours(13, 45, 0),
+                "arrival": today.setHours(15, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 10, 2015 12:30",
-                "arrival": "November 10, 2015 14:15",
+                "departure": today.setHours(12, 30, 0),
+                "arrival": today.setHours(14, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 14:15",
-                "arrival": "November 10, 2015 16:00",
+                "departure": today.setHours(14, 15, 0),
+                "arrival": today.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 10, 2015 16:00",
-                "arrival": "November 10, 2015 17:45",
+                "departure": today.setHours(16, 0, 0),
+                "arrival": today.setHours(17, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 17:45",
-                "arrival": "November 10, 2015 19:30",
+                "departure": today.setHours(17, 45, 0),
+                "arrival": today.setHours(19, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 10, 2015 16:30",
-                "arrival": "November 10, 2015 18:15",
+                "departure": today.setHours(16, 30, 0),
+                "arrival": today.setHours(18, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 18:15",
-                "arrival": "November 10, 2015 20:00",
+                "departure": today.setHours(18, 15, 0),
+                "arrival":today.setHours(20, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 10, 2015 10:00",
-                "arrival": "November 10, 2015 11:00",
+                "departure": today.setHours(10, 0, 0),
+                "arrival": today.setHours(11, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 11:00",
-                "arrival": "November 10, 2015 12:00",
+                "departure":today.setHours(11, 0, 0),
+                "arrival": today.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 10, 2015 14:00",
-                "arrival": "November 10, 2015 15:00",
+                "departure": today.setHours(14, 0, 0),
+                "arrival": today.setHours(15, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 15:00",
-                "arrival": "November 10, 2015 16:00",
+                "departure": today.setHours(15, 0, 0),
+                "arrival": today.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 10, 2015 16:00",
-                "arrival": "November 10, 2015 17:00",
+                "departure": today.setHours(16, 0, 0),
+                "arrival": today.setHours(17, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 17:00",
-                "arrival": "November 10, 2015 18:00",
+                "departure": today.setHours(17, 0, 0),
+                "arrival": today.setHours(18, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
+
             {
-                "departure": "November 10, 2015 8:00",
-                "arrival": "November 10, 2015 9:45",
+                "departure": tomorrow.setHours(8, 0, 0),
+                "arrival": tomorrow.setHours(9, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 10, 2015 9:45",
-                "arrival": "November 10, 2015 11:30",
+                "departure": tomorrow.setHours(9, 45, 0),
+                "arrival": tomorrow.setHours(11, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 10, 2015 8:30",
-                "arrival": "November 10, 2015 10:15",
+                "departure": tomorrow.setHours(8, 30, 0),
+                "arrival": tomorrow.setHours(10, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 10:15",
-                "arrival": "November 11, 2015 12:00",
+                "departure": tomorrow.setHours(10, 15, 0),
+                "arrival": tomorrow.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 11, 2015 12:00",
-                "arrival": "November 11, 2015 13:45",
+                "departure": tomorrow.setHours(12, 0, 0),
+                "arrival": tomorrow.setHours(13, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 13:45",
-                "arrival": "November 11, 2015 15:30",
+                "departure": tomorrow.setHours(13, 45, 0),
+                "arrival": tomorrow.setHours(15, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 11, 2015 12:30",
-                "arrival": "November 11, 2015 14:15",
+                "departure": tomorrow.setHours(12, 30, 0),
+                "arrival": tomorrow.setHours(14, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 14:15",
-                "arrival": "November 11, 2015 16:00",
+                "departure": tomorrow.setHours(14, 15, 0),
+                "arrival": tomorrow.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 11, 2015 16:00",
-                "arrival": "November 11, 2015 17:45",
+                "departure": tomorrow.setHours(16, 0, 0),
+                "arrival": tomorrow.setHours(17, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 17:45",
-                "arrival": "November 11, 2015 19:30",
+                "departure": tomorrow.setHours(17, 45, 0),
+                "arrival": tomorrow.setHours(19, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 11, 2015 16:30",
-                "arrival": "November 11, 2015 18:15",
+                "departure": tomorrow.setHours(16, 30, 0),
+                "arrival": tomorrow.setHours(18, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 18:15",
-                "arrival": "November 11, 2015 20:00",
+                "departure": tomorrow.setHours(18, 15, 0),
+                "arrival":tomorrow.setHours(20, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 11, 2015 10:00",
-                "arrival": "November 11, 2015 11:00",
+                "departure": tomorrow.setHours(10, 0, 0),
+                "arrival": tomorrow.setHours(11, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 11:00",
-                "arrival": "November 11, 2015 12:00",
+                "departure":tomorrow.setHours(11, 0, 0),
+                "arrival": tomorrow.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 11, 2015 14:00",
-                "arrival": "November 11, 2015 15:00",
+                "departure": tomorrow.setHours(14, 0, 0),
+                "arrival": tomorrow.setHours(15, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 15:00",
-                "arrival": "November 11, 2015 16:00",
+                "departure": tomorrow.setHours(15, 0, 0),
+                "arrival": tomorrow.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 11, 2015 16:00",
-                "arrival": "November 11, 2015 17:00",
+                "departure": tomorrow.setHours(16, 0, 0),
+                "arrival": tomorrow.setHours(17, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 11, 2015 17:00",
-                "arrival": "November 11, 2015 18:00",
+                "departure": tomorrow.setHours(17, 0, 0),
+                "arrival": tomorrow.setHours(18, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
+
             {
-                "departure": "November 12, 2015 8:00",
-                "arrival": "November 12, 2015 9:45",
+                "departure": aftertomorrow.setHours(8, 0, 0),
+                "arrival": aftertomorrow.setHours(9, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 9:45",
-                "arrival": "November 12, 2015 11:30",
+                "departure": aftertomorrow.setHours(9, 45, 0),
+                "arrival": aftertomorrow.setHours(11, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 12, 2015 8:30",
-                "arrival": "November 12, 2015 10:15",
+                "departure": aftertomorrow.setHours(8, 30, 0),
+                "arrival": aftertomorrow.setHours(10, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 10:15",
-                "arrival": "November 12, 2015 12:00",
+                "departure": aftertomorrow.setHours(10, 15, 0),
+                "arrival": aftertomorrow.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 12, 2015 12:00",
-                "arrival": "November 12, 2015 13:45",
+                "departure": aftertomorrow.setHours(12, 0, 0),
+                "arrival": aftertomorrow.setHours(13, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 13:45",
-                "arrival": "November 12, 2015 15:30",
+                "departure": aftertomorrow.setHours(13, 45, 0),
+                "arrival": aftertomorrow.setHours(15, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 12, 2015 12:30",
-                "arrival": "November 12, 2015 14:15",
+                "departure": aftertomorrow.setHours(12, 30, 0),
+                "arrival": aftertomorrow.setHours(14, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 14:15",
-                "arrival": "November 12, 2015 16:00",
+                "departure": aftertomorrow.setHours(14, 15, 0),
+                "arrival": aftertomorrow.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 12, 2015 16:00",
-                "arrival": "November 12, 2015 17:45",
+                "departure": aftertomorrow.setHours(16, 0, 0),
+                "arrival": aftertomorrow.setHours(17, 45, 0),
                 "capacity": "120",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 17:45",
-                "arrival": "November 12, 2015 19:30",
+                "departure": aftertomorrow.setHours(17, 45, 0),
+                "arrival": aftertomorrow.setHours(19, 30, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
             {
-                "departure": "November 12, 2015 16:30",
-                "arrival": "November 12, 2015 18:15",
+                "departure": aftertomorrow.setHours(16, 30, 0),
+                "arrival": aftertomorrow.setHours(18, 15, 0),
                 "capacity": "120",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 18:15",
-                "arrival": "November 12, 2015 20:00",
+                "departure": aftertomorrow.setHours(18, 15, 0),
+                "arrival":aftertomorrow.setHours(20, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
             {
-                "departure": "November 12, 2015 10:00",
-                "arrival": "November 12, 2015 11:00",
+                "departure": aftertomorrow.setHours(10, 0, 0),
+                "arrival": aftertomorrow.setHours(11, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 11:00",
-                "arrival": "November 12, 2015 12:00",
+                "departure":aftertomorrow.setHours(11, 0, 0),
+                "arrival": aftertomorrow.setHours(12, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 12, 2015 14:00",
-                "arrival": "November 12, 2015 15:00",
+                "departure": aftertomorrow.setHours(14, 0, 0),
+                "arrival": aftertomorrow.setHours(15, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 15:00",
-                "arrival": "November 12, 2015 16:00",
+                "departure": aftertomorrow.setHours(15, 0, 0),
+                "arrival": aftertomorrow.setHours(16, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },
             {
-                "departure": "November 12, 2015 16:00",
-                "arrival": "November 12, 2015 17:00",
+                "departure": aftertomorrow.setHours(16, 0, 0),
+                "arrival": aftertomorrow.setHours(17, 0, 0),
                 "capacity": "120",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
             {
-                "departure": "November 12, 2015 17:00",
-                "arrival": "November 12, 2015 18:00",
+                "departure": aftertomorrow.setHours(17, 0, 0),
+                "arrival": aftertomorrow.setHours(18, 0, 0),
                 "capacity": "120",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
