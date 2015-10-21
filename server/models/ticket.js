@@ -16,7 +16,8 @@ var TicketSchema = new Schema({
     },
     _tripId: {
         type: Schema.Types.ObjectId,
-        required: 'A Ticket must be assigned to trip.'
+        required: 'A Ticket must be assigned to trip.',
+        ref: 'Trip'
     }
 });
 

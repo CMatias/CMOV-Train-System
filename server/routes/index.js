@@ -37,24 +37,24 @@ router.route('/inspectors/:inspector_id')
     .delete(authController.isAuthenticated, inspectorController.deleteInspector);
 
 //Ticket Routes
-router.route('/ticket')
+router.route('/tickets')
     .get(ticketController.getTickets)
     .post(ticketController.postTicket);
 
-router.route('/ticket/:ticket_id')
-    .get(authController.isAuthenticated, ticketController.getTicket)
-    .put(authController.isAuthenticated, ticketController.putTicket)
-    .delete(authController.isAuthenticated, ticketController.deleteTicket);
+router.route('/passengertickets')
+    .get(authController.isAuthenticated, ticketController.getTicketsByUser);
 
 //Trip Routes
-router.route('/trip')
+router.route('/trips')
     .get(tripController.getTrips)
     .post(tripController.postTrip);
 
+router.route('/trips/:date')
+    .get(tripController.getTripsByDate);
+
 router.route('/trip/:trip_id')
-    .get(authController.isAuthenticated, tripController.getTrip)
-    .put(authController.isAuthenticated, tripController.putTrip)
-    .delete(authController.isAuthenticated, tripController.deleteTrip);
+    .get(authController.isAuthenticated, tripController.getTrip);
+
 
 
 module.exports = router;

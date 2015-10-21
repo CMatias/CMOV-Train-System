@@ -11,7 +11,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure": today.setHours(8, 0, 0),
                 "arrival": today.setHours(9, 45, 0),
-                "capacity": "120",
+                "capacity": "119",
                 "departureStation": "A",
                 "arrivalStation": "Central Station"
             },
@@ -19,7 +19,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure": today.setHours(9, 45, 0),
                 "arrival": today.setHours(11, 30, 0),
-                "capacity": "120",
+                "capacity": "119",
                 "departureStation": "Central Station",
                 "arrivalStation": "B"
             },
@@ -91,7 +91,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure": today.setHours(16, 30, 0),
                 "arrival": today.setHours(18, 15, 0),
-                "capacity": "120",
+                "capacity": "118",
                 "departureStation": "B",
                 "arrivalStation": "Central Station"
             },
@@ -99,7 +99,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure": today.setHours(18, 15, 0),
                 "arrival":today.setHours(20, 0, 0),
-                "capacity": "120",
+                "capacity": "118",
                 "departureStation": "Central Station",
                 "arrivalStation": "A"
             },
@@ -107,7 +107,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure": today.setHours(10, 0, 0),
                 "arrival": today.setHours(11, 0, 0),
-                "capacity": "120",
+                "capacity": "119",
                 "departureStation": "C",
                 "arrivalStation": "Central Station"
             },
@@ -115,7 +115,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "departure":today.setHours(11, 0, 0),
                 "arrival": today.setHours(12, 0, 0),
-                "capacity": "120",
+                "capacity": "119",
                 "departureStation": "Central Station",
                 "arrivalStation": "C"
             },

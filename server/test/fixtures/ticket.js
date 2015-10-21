@@ -10,10 +10,10 @@ module.exports = function(fixtures) {
     var trips = fixtures.get('Trip').Trip;
     t1_A_CS = trips[0]._id;
     t1_CS_B = trips[1]._id;
-    t2_B_CS = trips[12]._id;
-    t2_CS_A = trips[13]._id;
-    t3_C_CS = trips[14]._id;
-    t4_CS_C = trips[19]._id;
+    t2_B_CS = trips[10]._id;
+    t2_CS_A = trips[11]._id;
+    t3_C_CS = trips[12]._id;
+    t4_CS_C = trips[13]._id;
 
 
     fixtures.save('Ticket', {
