@@ -16,8 +16,8 @@ exports.postTrip= function(req, res) {
     trip.departure = req.body.departure;
     trip.arrival = req.body.arrival;
     trip.capacity = req.body.capacity;
-    trip._departureStationId = req.body.departurestation;
-    trip._arrivalStationId = req.body.arrivalstation;
+    trip.departurestation = req.body.departurestation;
+    trip.arrivalstation = req.body.arrivalstation;
 
     trip.save(function(err) {
         if (err) {
@@ -45,8 +45,8 @@ exports.putTrip = function(req, res) {
         trip.departure = req.body.departure;
         trip.arrival = req.body.arrival;
         trip.capacity = req.body.capacity;
-        trip._departureStationId = req.body.departurestation;
-        trip._arrivalStationId = req.body.arrivalstation;
+        trip.departurestation = req.body.departurestation;
+        trip.arrivalstation = req.body.arrivalstation;
 
         trip.save(function(err) {
             if (err) {

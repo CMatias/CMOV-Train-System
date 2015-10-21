@@ -5,7 +5,6 @@ var authController = require('../controllers/auth');
 var passengerController = require('../controllers/passenger');
 var ticketController = require('../controllers/ticket');
 var tripController = require('../controllers/trip');
-var stationController = require('../controllers/station');
 
 router.use(function (req, res, next) {
     console.log('Request received.');
@@ -46,14 +45,5 @@ router.route('/trip/:trip_id')
     .put(authController.isAuthenticated, tripController.putTrip)
     .delete(authController.isAuthenticated, tripController.deleteTrip);
 
-//Station Routes
-router.route('/station')
-    .get(stationController.getStations)
-    .post(stationController.postStation);
-
-router.route('/station/:station_id')
-    .get(authController.isAuthenticated, stationController.getStation)
-    .put(authController.isAuthenticated, stationController.putStation)
-    .delete(authController.isAuthenticated, stationController.deleteStation);
 
 module.exports = router;

@@ -17,12 +17,12 @@ var TripSchema = new Schema({
     train: {
         type: String
     },
-    _departureStationId: {
-        type: Schema.Types.ObjectId,
+    departureStation: {
+        type: String,
         required: 'A Trip must be between two stations.'
     },
-    _arrivalStationId: {
-        type: Schema.Types.ObjectId,
+    arrivalStation: {
+        type: String,
         required: 'A Trip must be between two stations.'
     }
 });
