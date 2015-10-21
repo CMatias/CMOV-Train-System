@@ -20,11 +20,14 @@ var TicketSchema = new Schema({
     }
 });
 
+//TODO: CHANGE DIS
+/*
 TicketSchema.methods.isValid = function(cb) {
     if(this.date > Date.now) {
         cb(null, isValid);
     }
 };
+*/
 
 module.exports = mongoose.model('Ticket', TicketSchema);
 

@@ -3,6 +3,7 @@ var router = express.Router();
 
 var authController = require('../controllers/auth');
 var passengerController = require('../controllers/passenger');
+var inspectorController = require('../controllers/inspector');
 var ticketController = require('../controllers/ticket');
 var tripController = require('../controllers/trip');
 
@@ -24,6 +25,16 @@ router.route('/passengers/:passenger_id')
     .get(authController.isAuthenticated, passengerController.getPassenger)
     .put(authController.isAuthenticated, passengerController.putPassenger)
     .delete(authController.isAuthenticated, passengerController.deletePassenger);
+
+//Inspector Routes
+router.route('/inspectors')
+    .get(inspectorController.getInspectors)
+    .post(inspectorController.postInspector);
+
+router.route('/inspectors/:inspector_id')
+    .get(authController.isAuthenticated, inspectorController.getInspector)
+    .put(authController.isAuthenticated, inspectorController.putInspector)
+    .delete(authController.isAuthenticated, inspectorController.deleteInspector);
 
 //Ticket Routes
 router.route('/ticket')

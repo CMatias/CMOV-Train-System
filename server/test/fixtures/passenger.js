@@ -1,7 +1,10 @@
+mongoose = require('mongoose');
+
 module.exports = function(fixtures) {
     fixtures.save('Passenger', {
         Passenger: [
             {
+                "_id": mongoose.Types.ObjectId(),
                 "username": "JohnDoe",
                 "email": "jdoe@gmail.com",
                 "password": "jdoe1234",
@@ -12,6 +15,7 @@ module.exports = function(fixtures) {
                 }
             },
             {
+                "_id": mongoose.Types.ObjectId(),
                 "username": "RobertSmith",
                 "email": "rsmith@gmail.com",
                 "password": "rsmith1234",
@@ -22,6 +26,7 @@ module.exports = function(fixtures) {
                 }
             },
             {
+                "_id": mongoose.Types.ObjectId(),
                 "username": "ShelbyBell",
                 "email": "sbell@gmail.com",
                 "password": "sbell1234",
@@ -37,7 +42,6 @@ module.exports = function(fixtures) {
     fixtures('Passenger', function(err, data) {
         if(err) {
             console.log(err);
-            exit();
         } else {
             console.log('Loaded Passenger fixtures.');
         }
