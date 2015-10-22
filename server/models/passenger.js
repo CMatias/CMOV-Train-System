@@ -13,23 +13,25 @@ var PassengerSchema = new Schema({
         unique: true,
         required: 'A Passenger must have an email.'
     },
-    password: { 
-        type: String, 
+    password: {
+        type: String,
         required: 'A Passenger must have a password.',
     },
-    creditcard: {
-        type: {
-            type: String,
-            required: true,
-            enum: ['Credit', 'Debit']
-        },
-        number: {
-            type: Number
-        },
-        validity: {
-            type: Date
+    creditcards: [
+        {
+            type: {
+                type: String,
+                required: true,
+                enum: ['Credit', 'Debit']
+            },
+            number: {
+                type: Number
+            },
+            validity: {
+                type: Date
+            }
         }
-    }
+    ]
 });
 
 // Execute before each passenger.save() call

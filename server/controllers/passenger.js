@@ -16,7 +16,7 @@ exports.postPassenger = function(req, res) {
     passenger.username = req.body.username;
     passenger.email = req.body.email;
     passenger.password = req.body.password;
-    passenger.creditcard = req.body.creditcard;
+    passenger.creditcards = req.body.creditcards;
 
     passenger.save(function(err) {
         if (err) {
@@ -43,7 +43,7 @@ exports.putPassenger = function(req, res) {
         passenger.username = req.body.username;
         passenger.email = req.body.email;
         passenger.password = req.body.password;
-        passenger.creditcard = req.body.creditcard;
+        passenger.creditcards = req.body.creditcards;
 
         passenger.save(function(err) {
             if (err) {
