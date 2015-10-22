@@ -170,8 +170,8 @@ module.exports = function(fixtures) {
             },
             {
                 "_id": mongoose.Types.ObjectId(),
-                "departure": tomorro.setHours(8, 0, 0),
-                "arrival": tomorro.setHours(9, 45, 0),
+                "departure": tomorrow.setHours(8, 0, 0),
+                "arrival": tomorrow.setHours(9, 45, 0),
                 "capacity": "119",
                 "train": "A-CS-1",
                 "departureStation": "A",
