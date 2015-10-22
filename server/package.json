@@ -22,10 +22,10 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "jsonwebtoken": "^5.4.0",
     "mongoose": "^4.1.11",
+    "morgan": "^1.6.1",
     "node-mongoose-fixtures": "^0.2.4",
-    "nodemon": "^1.7.1",
-    "passport": "^0.3.0",
-    "passport-http": "^0.3.0"
+    "nodemon": "^1.7.1"
   }
 }

@@ -10,7 +10,39 @@ exports.getTrips = function(req, res) {
 };
 
 exports.getTripsByDate = function(req, res) {
-    Trip.find({"departure": req.params.date}, function (err, trips) {
+
+    var bDate = new Date();
+    bDate.setFullYear(req.params.year, req.params.month-1, req.params.day);
+    bDate.setHours(0, 0, 0);
+    var aDate = new Date();
+    aDate.setDate(bDate.getDate() + 1);
+    aDate.setHours(0, 0, 0);
+    console.log(bDate + "<>" + aDate);
+
+    Trip.find({"departure": {$gt: bDate, $lt: aDate }}, function (err, trips) {
+        if (err) {
+            res.send(err);
+        }
+        console.log(trips.length);
+        res.json(trips);
+    });
+};
+
+exports.getTripsByDateAndStations = function(req, res) {
+
+    var bDate = new Date();
+    bDate.setFullYear(req.params.year, req.params.month-1, req.params.day);
+    bDate.setHours(0, 0, 0);
+    var aDate = new Date();
+    aDate.setDate(bDate.getDate() + 1);
+    aDate.setHours(0, 0, 0);
+    console.log(bDate + "<>" + aDate);
+
+    Trip.find({
+        "departure": {$gt: bDate, $lt: aDate },
+        "departureStation": req.params.departure,
+        "arrivalStation": req.params.arrival
+    }, function (err, trips) {
         if (err) {
             res.send(err);
         }

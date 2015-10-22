@@ -49,12 +49,13 @@ router.route('/trips')
     .get(tripController.getTrips)
     .post(tripController.postTrip);
 
-router.route('/trips/:date')
+router.route('/trips/:year/:month/:day')
     .get(tripController.getTripsByDate);
+
+router.route('/trips/:year/:month/:day/:departure/:arrival')
+    .get(tripController.getTripsByDateAndStations);
 
 router.route('/trip/:trip_id')
     .get(tripController.getTrip);
-
-
 
 module.exports = router;
