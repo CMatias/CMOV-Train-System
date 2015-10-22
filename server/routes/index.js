@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var authController = require('../controllers/auth');
+//var authController = require('../controllers/auth');
 var passengerController = require('../controllers/passenger');
 var inspectorController = require('../controllers/inspector');
 var ticketController = require('../controllers/ticket');
@@ -12,8 +12,8 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.get('/', authController.isAuthenticated, function (req, res) {
-    res.json(authController.isAuthenticated, {message: 'Welcome to CMOV TrainTicketSystem API!'});
+router.get('/', function (req, res) {
+    res.json({message: 'Welcome to CMOV TrainTicketSystem API!'});
 });
 
 //Passenger Routes
@@ -22,9 +22,9 @@ router.route('/passengers')
     .post(passengerController.postPassenger);
 
 router.route('/passengers/:passenger_id')
-    .get(authController.isAuthenticated, passengerController.getPassenger)
-    .put(authController.isAuthenticated, passengerController.putPassenger)
-    .delete(authController.isAuthenticated, passengerController.deletePassenger);
+    .get(passengerController.getPassenger)
+    .put(passengerController.putPassenger)
+    .delete(passengerController.deletePassenger);
 
 //Inspector Routes
 router.route('/inspectors')
@@ -32,9 +32,9 @@ router.route('/inspectors')
     .post(inspectorController.postInspector);
 
 router.route('/inspectors/:inspector_id')
-    .get(authController.isAuthenticated, inspectorController.getInspector)
-    .put(authController.isAuthenticated, inspectorController.putInspector)
-    .delete(authController.isAuthenticated, inspectorController.deleteInspector);
+    .get(inspectorController.getInspector)
+    .put(inspectorController.putInspector)
+    .delete(inspectorController.deleteInspector);
 
 //Ticket Routes
 router.route('/tickets')
@@ -42,7 +42,7 @@ router.route('/tickets')
     .post(ticketController.postTicket);
 
 router.route('/passengertickets')
-    .get(authController.isAuthenticated, ticketController.getTicketsByUser);
+    .get(ticketController.getTicketsByUser);
 
 //Trip Routes
 router.route('/trips')
@@ -53,7 +53,7 @@ router.route('/trips/:date')
     .get(tripController.getTripsByDate);
 
 router.route('/trip/:trip_id')
-    .get(authController.isAuthenticated, tripController.getTrip);
+    .get(tripController.getTrip);
 
 
 

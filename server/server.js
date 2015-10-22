@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var routes = require('./routes');
+var config = require('./config');
 
 var app = express();
 var port = process.env.PORT || 1337;
@@ -14,16 +15,10 @@ app.use('/api', routes);
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-  console.log('addr: '+add);
-});
-
-var mongoURI = 'mongodb://admin:password@ds033744.mongolab.com:33744/cmov-p1';
-//var mongoURI = 'mongodb://localhost:27017/test';
-var MongoDB = mongoose.connect(mongoURI).connection;
+var MongoDB = mongoose.connect(config.database).connection;
 MongoDB.on('error', function(err) { console.log(err.message); });
 MongoDB.once('open', function() {
-  console.log("mongodb connection open");
+  console.log("MongoDB connection open");
   require('./test/fixtures');
 });
 

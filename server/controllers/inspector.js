@@ -1,7 +1,10 @@
 var Inspector = require('../models/inspector');
 
 exports.getInspectors = function(req, res) {
-    Inspector.find(function (err, inspectors) {
+    Inspector
+        .find()
+        .populate("_trips")
+        .exec(function (err, inspectors) {
         if (err) {
             res.send(err);
         }
@@ -16,7 +19,7 @@ exports.postInspector = function(req, res) {
     inspector.username = req.body.username;
     inspector.email = req.body.email;
     inspector.password = req.body.password;
-    inspector._tripIds = req.body.tripids;
+    inspector._trips = req.body.tripids;
 
     inspector.save(function(err) {
         if (err) {
@@ -27,7 +30,10 @@ exports.postInspector = function(req, res) {
 };
 
 exports.getInspector = function(req, res) {
-    Inspector.findById(req.params.inspector_id, function(err, inspector) {
+    Inspector
+        .findById(req.params.inspector_id)
+        .populate("_trips")
+        .exec(function(err, inspector) {
         if (err) {
             res.send(err);
         }
@@ -44,7 +50,7 @@ exports.putInspector = function(req, res) {
         inspector.username = req.body.username;
         inspector.email = req.body.email;
         inspector.password = req.body.password;
-        inspector._tripIds = req.body.tripids;
+        inspector._trips = req.body.tripids;
 
         inspector.save(function(err) {
             if (err) {

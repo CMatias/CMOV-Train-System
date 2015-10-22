@@ -2,18 +2,21 @@ var Ticket = require('../models/ticket');
 var Trip = require('../models/ticket');
 
 exports.getTickets = function(req, res) {
-    Ticket.find(function (err, tickets) {
-        if (err) {
-            res.send(err);
-        }
-        res.json(tickets);
-    });
+    Ticket
+        .find()
+        .populate([{path:'_trip'}, {path:'_passenger'}])
+        .exec(function (err, tickets) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(tickets);
+        });
 };
 
 exports.getTicketsByUser = function(req, res) {
     Ticket
         .find({ _passengerId: req.user._id })
-        .populate("_tripId")
+        .populate([{path:'_trip'}, {path:'_passenger'}])
         .exec(function(err, tickets) {
             if (err) {
                 res.send(err);
@@ -29,8 +32,8 @@ exports.postTicket = function(req, res) {
 
     ticket.price = req.body.price;
     ticket.seat = req.body.seat;
-    ticket._passengerId = req.body.passengerid;
-    ticket._tripId = req.body.tripid;
+    ticket._passenger = req.body.passengerid;
+    ticket._trip = req.body.tripid;
 
     ticket.save(function(err) {
         if (err) {
