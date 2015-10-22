@@ -8,14 +8,14 @@ fixtures.reset(function(err, data) {
         console.log('Fixtures reset: ' + data);
 
         var loadIndependentFixtures = function(callback) {
-            require('./Passenger')(fixtures);
-            require('./Trip')(fixtures);
+            require('./passenger')(fixtures);
+            require('./trip')(fixtures);
             callback();
         };
 
         loadIndependentFixtures(function() {
-            require('./Ticket')(fixtures);
-            require('./Inspector')(fixtures);
+            require('./ticket')(fixtures);
+            require('./inspector')(fixtures);
         });
     }
 });
