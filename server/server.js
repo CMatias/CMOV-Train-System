@@ -14,6 +14,10 @@ app.use('/api', routes);
 app.listen(port);
 console.log('Magic happens on port ' + port);
 
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+  console.log('addr: '+add);
+});
+
 var mongoURI = 'mongodb://admin:password@ds033744.mongolab.com:33744/cmov-p1';
 //var mongoURI = 'mongodb://localhost:27017/test';
 var MongoDB = mongoose.connect(mongoURI).connection;
