@@ -19,52 +19,44 @@ module.exports = function(fixtures) {
     fixtures.save('Ticket', {
         Ticket: [
             {
-                "price": "4.50",
                 "seat": "98",
                 "_passenger": p1Id,
                 "_trip": t1_A_CS
             },
             {
-                "price": "5.50",
                 "seat": "98",
                 "_passenger": p1Id,
                 "_trip": t1_CS_B
             },
             {
-                "price": "5.50",
                 "seat": "56",
                 "_passenger": p1Id,
                 "_trip": t2_B_CS
             },
             {
-                "price": "4.50",
                 "seat": "56",
                 "_passenger": p1Id,
                 "_trip": t2_CS_A
             },
             {
-                "price": "5.50",
                 "seat": "44",
                 "_passenger": p2Id,
                 "_trip": t2_B_CS
             },
             {
-                "price": "6.00",
+                "seat": "44",
+                "_passenger": p2Id,
+                "_trip": t2_CS_A
+            },
+            {
                 "seat": "44",
                 "_passenger": p3Id,
                 "_trip": t3_C_CS
             },
             {
-                "price": "6.00",
-                "seat": "101",
+                "seat": "23",
                 "_passenger": p3Id,
                 "_trip": t4_CS_C
-            },
-            {
-                "price": "5.00",
-                "seat": "22",
-                "_passenger": p1Id,
-                "_trip": t1_CS_B
             }
         ]
     });

@@ -2,10 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TicketSchema = new Schema({
-    price: {
-        type: Number,
-        required: 'A Ticket must have a price.'
-    },
     seat: {
         type: Number,
         required: 'A Ticket must have a seat'
