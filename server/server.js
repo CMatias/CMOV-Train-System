@@ -2,14 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var morgan = require('morgan');
+var routes = require('./routes');
 var config = require('./config');
 
 var app = express();
-app.set('superSecret', config.secret);
 var port = process.env.PORT || 1337;
 
-var routes = require('./routes')(app);
-
+app.set('superSecret', config.secret);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
