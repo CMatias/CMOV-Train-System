@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 var authController = require('../controllers/auth');
 var passengerController = require('../controllers/passenger');
@@ -7,9 +8,30 @@ var inspectorController = require('../controllers/inspector');
 var ticketController = require('../controllers/ticket');
 var tripController = require('../controllers/trip');
 
-router.use(function (req, res, next) {
-    console.log('Request received.');
-    next();
+
+router.route('/authenticate')
+    .post(authController.authPassenger);
+
+router.use(function(req, res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (token) {
+        // verifies secret and checks exp
+        jwt.verify(token, req.app.get('superSecret'), function(err, decoded) {
+            if (err) {
+                return res.json({ success: false, message: 'Failed to authenticate token.' });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
+
+    } else {
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.'
+        });
+    }
 });
 
 router.get('/', function (req, res) {
@@ -17,9 +39,6 @@ router.get('/', function (req, res) {
 });
 
 //Passenger Routes
-router.route('/authenticate')
-    .post(authController.authPassenger);
-
 router.route('/passengers')
     .get(passengerController.getPassengers)
     .post(passengerController.postPassenger);
