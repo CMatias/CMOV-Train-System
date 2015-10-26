@@ -12,6 +12,9 @@ var tripController = require('../controllers/trip');
 router.route('/authenticate')
     .post(authController.authPassenger);
 
+router.route('/passengers')
+    .post(passengerController.postPassenger);
+
 router.use(function(req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -40,8 +43,7 @@ router.get('/', function (req, res) {
 
 //Passenger Routes
 router.route('/passengers')
-    .get(passengerController.getPassengers)
-    .post(passengerController.postPassenger);
+    .get(passengerController.getPassengers);
 
 router.route('/passengers/:passenger_id')
     .get(passengerController.getPassenger)
