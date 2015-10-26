@@ -38,17 +38,56 @@ exports.getTripsByDateAndStations = function(req, res) {
     aDate.setHours(0, 0, 0);
     console.log(bDate + "<>" + aDate);
 
-    Trip.find({
-        "departure": {$gt: bDate, $lt: aDate },
-        "departureStation": req.params.departure,
-        "arrivalStation": req.params.arrival
-    }, function (err, trips) {
-        if (err) {
-            res.send(err);
-        }
 
-        res.json(trips);
-    });
+    if(req.params.arrival == "Central Station") {
+        Trip
+            .find({
+                "departure": {$gt: bDate, $lt: aDate},
+                "departureStation": req.params.departure,
+                "arrivalStation": req.params.arrival
+            })
+            .sort({departure: 'ascending'})
+            .exec(function (err, trips) {
+                if (err) {
+                    res.send(err);
+                }
+
+                res.json(trips);
+            });
+    } else {
+        Trip
+            .find({
+                "departure": {$gt: bDate, $lt: aDate},
+                "departureStation": req.params.departure,
+                "arrivalStation":  "Central Station"})
+            .sort({departure: 'ascending'})
+            .exec(function (err, trips1) {
+                if (err) {
+                    res.send(err);
+                }
+
+                Trip
+                    .find({
+                        "departure": {$gt: bDate, $lt: aDate},
+                        "departureStation": "Central Station",
+                        "arrivalStation":  req.params.arrival
+                    })
+                    .sort({departure: 'ascending'})
+                    .exec(function (err, trips2) {
+                        if (err) {
+                            res.send(err);
+                        }
+
+                        var trips = [];
+                        for(var i = 0; i < trips2.length; i++){
+                            trips.push(trips1[i]);
+                            trips.push(trips2[i]);
+                        }
+
+                        res.json(trips);
+                    });
+            });
+    }
 };
 
 exports.postTrip = function(req, res) {

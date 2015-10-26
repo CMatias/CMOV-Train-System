@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Trip = require('./trip');
 
 var TicketSchema = new Schema({
     seat: {
@@ -17,15 +18,6 @@ var TicketSchema = new Schema({
         ref: 'Trip'
     }
 });
-
-//TODO: CHANGE DIS
-/*
-TicketSchema.methods.isValid = function(cb) {
-    if(this.date > Date.now) {
-        cb(null, isValid);
-    }
-};
-*/
 
 module.exports = mongoose.model('Ticket', TicketSchema);
 

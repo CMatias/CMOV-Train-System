@@ -65,9 +65,6 @@ router.route('/tickets')
     .get(ticketController.getTickets)
     .post(ticketController.postTicket);
 
-router.route('/passengertickets')
-    .get(ticketController.getTicketsByUser);
-
 //Trip Routes
 router.route('/trips')
     .get(tripController.getTrips)

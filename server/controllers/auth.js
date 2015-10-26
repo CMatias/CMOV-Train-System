@@ -16,7 +16,7 @@ exports.authPassenger = function(req, res) {
                 }
 
                 var token = jwt.sign(passenger, req.app.get('superSecret'), {
-                    expiresIn: 24*60*60 // expires in 24 hours
+                    expiresIn: 24*60*60*3 // expires in 3*24 hours
                 });
                 res.json({
                     success: true,
