@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var Trip = require('./trip');
 
 var TicketSchema = new Schema({
     seat: {
@@ -16,6 +15,10 @@ var TicketSchema = new Schema({
         type: Schema.Types.ObjectId,
         required: 'A Ticket must be assigned to trip.',
         ref: 'Trip'
+    },
+    used: {
+        type: Boolean,
+        default: false
     }
 });
 

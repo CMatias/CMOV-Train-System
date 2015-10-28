@@ -2,18 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TripSchema = new Schema({
-    price: {
-        type: Number,
-        required: 'A Ticket must have a price.'
-    },
-    departure: {
-        type: Date,
-        required: 'A Ticket must have a departure time.'
-    },
-    arrival: {
-        type: Date,
-        required: 'A Ticket must have an arrival time.'
-    },
     currentCapacity: {
         type: Number,
         required: 'A Trip  must have a fixed capacity.'
@@ -33,7 +21,19 @@ var TripSchema = new Schema({
     arrivalStation: {
         type: String,
         required: 'A Trip must be between two stations.'
-    }
+    },
+    stops: [
+        {
+            station: {
+                type: String,
+                required: 'A Stop must have a station.'
+            },
+            date: {
+                type: Date,
+                required: 'A Stop must have a date.'
+            }
+        }
+    ]
 });
 
 module.exports = mongoose.model('Trip', TripSchema);

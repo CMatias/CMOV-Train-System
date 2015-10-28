@@ -1,5 +1,3 @@
-var Passenger = require('../../models/passenger');
-
 module.exports = function(fixtures) {
 
     var passengers = fixtures.get('Passenger').Passenger;
