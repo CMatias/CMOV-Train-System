@@ -9,6 +9,25 @@ exports.getPassengers = function(req, res) {
     });
 };
 
+exports.getPassenger = function(req, res) {
+    Passenger.findById(req.decoded._id, function(err, passenger) {
+        if (err) {
+            res.send(err);
+        }
+        res.json(passenger);
+    })
+};
+
+exports.getCreditCards = function(req, res) {
+    Passenger.findById(req.decoded._id , function(err, passenger) {
+        if (err) {
+            res.send(err);
+        }
+
+        res.json(passenger.creditcards);
+    })
+};
+
 exports.postPassenger = function(req, res) {
 
     var passenger = new Passenger();
@@ -26,17 +45,32 @@ exports.postPassenger = function(req, res) {
     })
 };
 
-exports.getPassenger = function(req, res) {
-    Passenger.findById(req.params.passenger_id, function(err, passenger) {
+exports.postCreditCards = function(req, res) {
+
+    Passenger.findById(req.decoded._id , function(err, passenger) {
         if (err) {
             res.send(err);
         }
-        res.json(passenger);
-    })
+
+        var creditcard = {};
+        creditcard.type = req.body.type;
+        creditcard.number = req.body.number;
+        creditcard.validity = req.body.validity;
+
+        cards = passenger.creditcards.concat(creditcard);
+        passenger.creditcards = cards;
+
+        passenger.save(function(err) {
+            if (err) {
+                res.send(err);
+            }
+            res.json({ message: 'Added creditcard to: ' + passenger.username + '.' });
+        })
+    });
 };
 
 exports.putPassenger = function(req, res) {
-    Passenger.findById(req.params.passenger_id, function(err, passenger) {
+    Passenger.findById(req.decoded._id, function(err, passenger) {
         if (err) {
             res.send(err);
         }
@@ -56,7 +90,7 @@ exports.putPassenger = function(req, res) {
 
 exports.deletePassenger = function(req, res) {
     Passenger.remove({
-        _id: req.params.passenger_id
+        _id: req.decoded._id
     }, function(err, passenger) {
         if (err) {
             res.send(err);

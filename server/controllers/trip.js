@@ -19,7 +19,7 @@ exports.getTripsByDate = function(req, res) {
     aDate.setHours(0, 0, 0);
     console.log(bDate + "<>" + aDate);
 
-    Trip.find({"departure": {$gt: bDate, $lt: aDate }}, function (err, trips) {
+    Trip.find({"stops.date": {$gt: bDate, $lt: aDate }}, function (err, trips) {
         if (err) {
             res.send(err);
         }
@@ -28,6 +28,7 @@ exports.getTripsByDate = function(req, res) {
     });
 };
 
+/*
 exports.getTripsByDateAndStations = function(req, res) {
 
     var bDate = new Date();
@@ -89,24 +90,8 @@ exports.getTripsByDateAndStations = function(req, res) {
             });
     }
 };
+*/
 
-exports.postTrip = function(req, res) {
-
-    var trip = new Trip();
-
-    trip.departure = req.body.departure;
-    trip.arrival = req.body.arrival;
-    trip.capacity = req.body.capacity;
-    trip.departurestation = req.body.departurestation;
-    trip.arrivalstation = req.body.arrivalstation;
-
-    trip.save(function(err) {
-        if (err) {
-            res.send(err);
-        }
-        res.json({ message: 'Trip created.' });
-    })
-};
 
 exports.getTrip = function(req, res) {
     Trip.findById(req.params.trip_id, function(err, trip) {
