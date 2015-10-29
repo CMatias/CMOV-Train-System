@@ -6,7 +6,7 @@ var routes = require('./routes');
 var config = require('./config');
 
 var app = express();
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3128;
 
 app.set('superSecret', config.secret);
 app.use(bodyParser.urlencoded({ extended: true }));
