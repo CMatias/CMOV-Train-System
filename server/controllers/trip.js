@@ -39,13 +39,82 @@ exports.getTripsByDateAndStations = function(req, res) {
     aDate.setHours(0, 0, 0);
 
     var ret = [];
+    var depStation = req.params.departure;
+    var arrStation = req.params.arrival;
 
-    //alert(s.indexOf("oo") > -1);
+    //Check for multi ticket scenario
+    if( (depStation.indexOf("C") > -1 && (arrStation.indexOf("B") >-1 || arrStation.indexOf("A") > -1)) ||
+        (arrStation.indexOf("C") > -1 && (depStation.indexOf("B") >-1 || depStation.indexOf("A") > -1)) ){
+        Trip.find({"stops.date": {$gt: bDate, $lt: aDate }}, function (err, trips) {
+            if (err) {
+                res.send(err);
+            }
 
+            for(var i = 0; i < trips.length; i++){
+                var stops = trips[i].stops;
+                var foundDep = -1;
+                var foundCentral = -1;
+                var tripArray = [];
+                for(var j = 0; j < stops.length; j++){
+                    if(stops[j].station == depStation){
+                        foundDep = j;
+                    } else if(stops[j].station == "MS"){
+                        foundCentral = j;
+                    }
+                    if( (stops[j].station == "MS" && foundDep > -1)){
+                        trips[i].stops = stops.slice(foundDep, j+1);
+                        var temp = trips[i].toObject();
+                        var traveledStation = j+1-foundDep;
+                        temp.price = traveledStation * 2.50;
+                        console.log(temp);
+                        trips[i] = temp;
+                        tripArray.push(trips[i]);
+                    } else if (stops[j].station == arrStation && foundCentral > -1){
+                        trips[i].stops = stops.slice(foundCentral, j+1);
+                        var temp = trips[i].toObject();
+                        var traveledStation = j+1-foundCentral;
+                        temp.price = traveledStation * 2.50;
+                        console.log(temp);
+                        trips[i] = temp;
+                        tripArray.push(trips[i]);
+                    }
+                }
+                for(var k = 0; k < tripArray.length; k++){
 
+                }
+            }
 
-    res.json();
+            res.json(ret);
+        });
 
+    } else {
+        Trip.find({"stops.date": {$gt: bDate, $lt: aDate }}, function (err, trips) {
+            if (err) {
+                res.send(err);
+            }
+
+            for(var i = 0; i < trips.length; i++){
+                var stops = trips[i].stops;
+                var foundDep = -1;
+                for(var j = 0; j < stops.length; j++){
+                    if(stops[j].station == depStation){
+                        foundDep = j;
+                    }
+                    if(stops[j].station == arrStation && foundDep > -1){
+                        trips[i].stops = stops.slice(foundDep, j+1);
+                        var temp = trips[i].toObject();
+                        var traveledStation = j+1-foundDep;
+                        temp.price = traveledStation * 2.50;
+                        console.log(temp);
+                        trips[i] = temp;
+                        ret.push(trips[i]);
+                    }
+                }
+            }
+
+            res.json(ret);
+        });
+    }
 };
 
 

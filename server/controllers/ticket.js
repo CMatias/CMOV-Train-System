@@ -16,6 +16,20 @@ exports.getTickets = function(req, res) {
         });
 };
 
+exports.getTicketsByTrip = function(req, res) {
+    Ticket
+        .find({
+            "_trip" : req.params.trip_id,
+        })
+        .populate([{path:'_trip'}, {path:'_passenger'}])
+        .exec(function (err, tickets) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(tickets);
+        });
+};
+
 exports.postTicket = function(req, res) {
 
     var ticket = new Ticket();
