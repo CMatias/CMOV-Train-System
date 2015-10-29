@@ -11,12 +11,12 @@ module.exports = function(fixtures) {
                 "creditcards": [
                     {
                         "type": "Credit",
-                        "number": "123412341234",
+                        "number": "1234123412341234",
                         "validity": "January 10, 2016"
                     },
                     {
                         "type": "Debit",
-                        "number": "234123412341",
+                        "number": "2341234123412341",
                         "validity": "January 20, 2016"
                     }
                 ]
@@ -30,7 +30,7 @@ module.exports = function(fixtures) {
 
                     {
                         "type": "Debit",
-                        "number": "432143214321",
+                        "number": "4321432143214321",
                         "validity": "February 21, 2016"
                     }
                 ]
@@ -43,7 +43,7 @@ module.exports = function(fixtures) {
                 "creditcards": [
                     {
                         "type": "Credit",
-                        "number": "543254325432",
+                        "number": "5432543254325432",
                         "validity": "March 12, 2016"
                     }
                 ]

@@ -3,7 +3,10 @@ var Trip = require('../models/ticket');
 
 exports.getTickets = function(req, res) {
     Ticket
-        .find({"_passenger" : req.decoded._id })
+        .find({
+            "_passenger" : req.decoded._id,
+            "used": false
+        })
         .populate([{path:'_trip'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
             if (err) {

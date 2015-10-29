@@ -12,8 +12,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "119",
                 "maxCapacity": "120",
                 "train": "A-B-1",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: today.setHours(8, 0, 0)},
                     { station: "A-CS", date: today.setHours(8, 52, 30)},
@@ -27,8 +25,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "B-A-1",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: today.setHours(8, 0, 0)},
                     { station: "B-CS", date: today.setHours(8, 52, 30)},
@@ -42,8 +38,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "A-B-2",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: today.setHours(13, 0, 0)},
                     { station: "A-CS", date: today.setHours(13, 52, 30)},
@@ -57,8 +51,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "B-A-2",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: today.setHours(13, 0, 0)},
                     { station: "B-CS", date: today.setHours(13, 52, 30)},
@@ -72,8 +64,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "A-B-3",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: today.setHours(17, 0, 0)},
                     { station: "A-CS", date: today.setHours(17, 52, 30)},
@@ -87,8 +77,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "118",
                 "maxCapacity": "120",
                 "train": "B-A-3",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: today.setHours(17, 0, 0)},
                     { station: "B-CS", date: today.setHours(17, 52, 30)},
@@ -102,8 +90,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "69",
                 "maxCapacity": "70",
                 "train": "C-CS-1",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: today.setHours(10, 0, 0)},
                     { station: "C-CS", date: today.setHours(10, 30, 0)},
@@ -115,8 +101,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "69",
                 "maxCapacity": "70",
                 "train": "CS-C-1",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: today.setHours(10, 0, 0)},
                     { station: "C-CS", date: today.setHours(10, 30, 0)},
@@ -128,8 +112,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "C-CS-2",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: today.setHours(15, 0, 0)},
                     { station: "C-CS", date: today.setHours(15, 30, 0)},
@@ -141,8 +123,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "CS-C-2",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: today.setHours(15, 0, 0)},
                     { station: "C-CS", date: today.setHours(15, 30, 0)},
@@ -154,8 +134,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "C-CS-3",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: today.setHours(20, 0, 0)},
                     { station: "C-CS", date: today.setHours(20, 30, 0)},
@@ -164,13 +142,9 @@ module.exports = function(fixtures) {
             },
             {
                 "_id": mongoose.Types.ObjectId(),
-                "departure": today.setHours(17, 0, 0),
-                "arrival": today.setHours(18, 0, 0),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "CS-C-3",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: today.setHours(20, 0, 0)},
                     { station: "C-CS", date: today.setHours(20, 30, 0)},
@@ -182,8 +156,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "119",
                 "maxCapacity": "120",
                 "train": "A-B-1",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: tomorrow.setHours(8, 0, 0)},
                     { station: "A-CS", date: tomorrow.setHours(8, 52, 30)},
@@ -197,8 +169,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "B-A-1",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: tomorrow.setHours(8, 0, 0)},
                     { station: "B-CS", date: tomorrow.setHours(8, 52, 30)},
@@ -212,8 +182,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "A-B-2",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: tomorrow.setHours(13, 0, 0)},
                     { station: "A-CS", date: tomorrow.setHours(13, 52, 30)},
@@ -227,8 +195,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "B-A-2",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: tomorrow.setHours(13, 0, 0)},
                     { station: "B-CS", date: tomorrow.setHours(13, 52, 30)},
@@ -242,8 +208,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "120",
                 "maxCapacity": "120",
                 "train": "A-B-3",
-                "departureStation": "A",
-                "arrivalStation": "B",
                 "stops": [
                     { station: "A", date: tomorrow.setHours(17, 0, 0)},
                     { station: "A-CS", date: tomorrow.setHours(17, 52, 30)},
@@ -257,8 +221,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "118",
                 "maxCapacity": "120",
                 "train": "B-A-3",
-                "departureStation": "B",
-                "arrivalStation": "A",
                 "stops": [
                     { station: "B", date: tomorrow.setHours(17, 0, 0)},
                     { station: "B-CS", date: tomorrow.setHours(17, 52, 30)},
@@ -272,8 +234,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "69",
                 "maxCapacity": "70",
                 "train": "C-CS-1",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: tomorrow.setHours(10, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(10, 30, 0)},
@@ -285,8 +245,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "69",
                 "maxCapacity": "70",
                 "train": "CS-C-1",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: tomorrow.setHours(10, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(10, 30, 0)},
@@ -298,8 +256,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "C-CS-2",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: tomorrow.setHours(15, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(15, 30, 0)},
@@ -311,8 +267,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "CS-C-2",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: tomorrow.setHours(15, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(15, 30, 0)},
@@ -324,8 +278,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "C-CS-3",
-                "departureStation": "C",
-                "arrivalStation": "CS",
                 "stops": [
                     { station: "C", date: tomorrow.setHours(20, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(20, 30, 0)},
@@ -337,8 +289,6 @@ module.exports = function(fixtures) {
                 "currentCapacity": "70",
                 "maxCapacity": "70",
                 "train": "CS-C-3",
-                "departureStation": "CS",
-                "arrivalStation": "C",
                 "stops": [
                     { station: "CS", date: tomorrow.setHours(20, 0, 0)},
                     { station: "C-CS", date: tomorrow.setHours(20, 30, 0)},

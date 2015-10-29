@@ -1,21 +1,26 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var validators = require('mongoose-validators');
+
 
 var PassengerSchema = new Schema({
     username: {
         type: String,
         unique: true,
-        required: 'A Passenger must have an username.'
+        required: 'A Passenger must have an username.',
+        validate: validators.isAlphanumeric()
     },
     email: {
         type: String,
         unique: true,
-        required: 'A Passenger must have an email.'
+        required: 'A Passenger must have an email.',
+        validate: validators.isEmail()
     },
     password: {
         type: String,
         required: 'A Passenger must have a password.',
+        validate: validators.isAlphanumeric()
     },
     creditcards: [
         {
@@ -25,10 +30,13 @@ var PassengerSchema = new Schema({
                 enum: ['Credit', 'Debit']
             },
             number: {
-                type: Number
+                type: String,
+                required: 'A CreditCard must have a number.',
+                validate: validators.isLength(16)
             },
             validity: {
-                type: Date
+                type: Date,
+                required: 'A CreditCard must have a validity date.'
             }
         }
     ]

@@ -1,20 +1,24 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var validators = require('mongoose-validators');
 
 var InspectorSchema = new Schema({
     username: {
         type: String,
         required: 'An Inspector must have an username.',
+        validate: validators.isAlphanumeric()
     },
     email: {
         type: String,
         unique: true,
-        required: 'An Inspector must have an email.'
+        required: 'An Inspector must have an email.',
+        validate: validators.isEmail()
     },
     password: { 
         type: String, 
         required: 'An Inspector must have a password.',
+        validate: validators.isAlphanumeric()
     },
     _trips: [{ type: Schema.Types.ObjectId, ref: 'Trip' }]
 });

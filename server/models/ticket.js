@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 var TicketSchema = new Schema({
     seat: {
         type: Number,
+        min: 0,
         required: 'A Ticket must have a seat'
     },
     _passenger: {

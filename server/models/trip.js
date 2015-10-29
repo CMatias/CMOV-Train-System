@@ -4,23 +4,17 @@ var Schema = mongoose.Schema;
 var TripSchema = new Schema({
     currentCapacity: {
         type: Number,
+        min: 0,
         required: 'A Trip  must have a fixed capacity.'
     },
     maxCapacity: {
         type: Number,
+        min: 1,
         required: 'A Trip  must have a fixed capacity.'
     },
     train: {
         type: String,
         required: 'A Trip  must be assigned to a train.'
-    },
-    departureStation: {
-        type: String,
-        required: 'A Trip must be between two stations.'
-    },
-    arrivalStation: {
-        type: String,
-        required: 'A Trip must be between two stations.'
     },
     stops: [
         {

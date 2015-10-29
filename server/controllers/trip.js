@@ -43,9 +43,9 @@ exports.getTripsByDateAndStations = function(req, res) {
     if(req.params.arrival == "Central Station") {
         Trip
             .find({
-                "departure": {$gt: bDate, $lt: aDate},
-                "departureStation": req.params.departure,
-                "arrivalStation": req.params.arrival
+                "stops.date": {$gt: bDate, $lt: aDate},
+                "stops.station": req.params.departure,
+                "stops.station": req.params.arrival
             })
             .sort({departure: 'ascending'})
             .exec(function (err, trips) {
@@ -91,7 +91,6 @@ exports.getTripsByDateAndStations = function(req, res) {
     }
 };
 */
-
 
 exports.getTrip = function(req, res) {
     Trip.findById(req.params.trip_id, function(err, trip) {
