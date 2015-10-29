@@ -15,7 +15,7 @@ router.route('/authenticate')
 router.route('/passengers')
     .post(passengerController.postPassenger);
 
-
+/*
 router.use(function(req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -37,7 +37,7 @@ router.use(function(req, res, next) {
         });
     }
 });
-
+*/
 
 router.get('/', function (req, res) {
     res.json({message: 'Welcome to CMOV TrainTicketSystem API!'});
@@ -85,5 +85,8 @@ router.route('/trips/:year/:month/:day/:departure/:arrival')
 
 router.route('/trip/:trip_id')
     .get(tripController.getTrip);
+
+router.route('/trip/seats/:trip_id')
+    .get(tripController.getTripSeats);
 
 module.exports = router;

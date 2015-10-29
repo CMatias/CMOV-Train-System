@@ -16,7 +16,6 @@ exports.getTickets = function(req, res) {
         });
 };
 
-
 exports.postTicket = function(req, res) {
 
     var ticket = new Ticket();

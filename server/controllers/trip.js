@@ -1,4 +1,5 @@
 var Trip = require('../models/trip');
+var Ticket =  require('../models/ticket');
 
 exports.getTrips = function(req, res) {
     Trip.find(function (err, trips) {
@@ -17,7 +18,6 @@ exports.getTripsByDate = function(req, res) {
     var aDate = new Date();
     aDate.setDate(bDate.getDate() + 1);
     aDate.setHours(0, 0, 0);
-    console.log(bDate + "<>" + aDate);
 
     Trip.find({"stops.date": {$gt: bDate, $lt: aDate }}, function (err, trips) {
         if (err) {
@@ -28,7 +28,7 @@ exports.getTripsByDate = function(req, res) {
     });
 };
 
-/*
+
 exports.getTripsByDateAndStations = function(req, res) {
 
     var bDate = new Date();
@@ -37,60 +37,17 @@ exports.getTripsByDateAndStations = function(req, res) {
     var aDate = new Date();
     aDate.setDate(bDate.getDate() + 1);
     aDate.setHours(0, 0, 0);
-    console.log(bDate + "<>" + aDate);
+
+    var ret = [];
+
+    //alert(s.indexOf("oo") > -1);
 
 
-    if(req.params.arrival == "Central Station") {
-        Trip
-            .find({
-                "stops.date": {$gt: bDate, $lt: aDate},
-                "stops.station": req.params.departure,
-                "stops.station": req.params.arrival
-            })
-            .sort({departure: 'ascending'})
-            .exec(function (err, trips) {
-                if (err) {
-                    res.send(err);
-                }
 
-                res.json(trips);
-            });
-    } else {
-        Trip
-            .find({
-                "departure": {$gt: bDate, $lt: aDate},
-                "departureStation": req.params.departure,
-                "arrivalStation":  "Central Station"})
-            .sort({departure: 'ascending'})
-            .exec(function (err, trips1) {
-                if (err) {
-                    res.send(err);
-                }
+    res.json();
 
-                Trip
-                    .find({
-                        "departure": {$gt: bDate, $lt: aDate},
-                        "departureStation": "Central Station",
-                        "arrivalStation":  req.params.arrival
-                    })
-                    .sort({departure: 'ascending'})
-                    .exec(function (err, trips2) {
-                        if (err) {
-                            res.send(err);
-                        }
-
-                        var trips = [];
-                        for(var i = 0; i < trips2.length; i++){
-                            trips.push(trips1[i]);
-                            trips.push(trips2[i]);
-                        }
-
-                        res.json(trips);
-                    });
-            });
-    }
 };
-*/
+
 
 exports.getTrip = function(req, res) {
     Trip.findById(req.params.trip_id, function(err, trip) {
@@ -101,5 +58,20 @@ exports.getTrip = function(req, res) {
     })
 };
 
+
+exports.getTripSeats = function(req, res) {
+    Ticket.find({"_trip": req.params.trip_id}, function (err, tickets) {
+        if (err) {
+            res.send(err);
+        }
+
+        var ret = [];
+        for(var i = 0; i < tickets.length; i++) {
+            ret.push(tickets[i].seat);
+        }
+
+        res.json(ret);
+    });
+};
 
 
