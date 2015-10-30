@@ -42,8 +42,10 @@ exports.postTicket = function(req, res) {
             for(var i = 0; i < req.body.seats.length; i++) {
                 var ticket = new Ticket();
                 ticket.seat = req.body.seats[i];
+                ticket.price = req.body.price[i];
                 ticket._passenger = req.decoded._id;
                 ticket._trip = req.body.trips[i];
+
 
                 ticket.save(function (err) {
                     if (err) {

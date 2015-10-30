@@ -5,7 +5,12 @@ var TicketSchema = new Schema({
     seat: {
         type: Number,
         min: 0,
-        required: 'A Ticket must have a seat'
+        required: 'A Ticket must have a seat.'
+    },
+    price: {
+        type: Number,
+        min: 0,
+        required: 'A Ticket must have a price.'
     },
     _passenger: {
         type: Schema.Types.ObjectId,

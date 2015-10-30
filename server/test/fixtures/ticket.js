@@ -14,21 +14,25 @@ module.exports = function(fixtures) {
         Ticket: [
             {
                 "seat": "98",
+                "price": "12.5",
                 "_passenger": p1Id,
                 "_trip": t1
             },
             {
                 "seat": "28",
+                "price": "12.5",
                 "_passenger": p2Id,
                 "_trip": t1
             },
             {
                 "seat": "56",
+                "price": "12.5",
                 "_passenger": p1Id,
                 "_trip": t2
             },
             {
                 "seat": "11",
+                "price": "12.5",
                 "_passenger": p3Id,
                 "_trip": t3
             }
