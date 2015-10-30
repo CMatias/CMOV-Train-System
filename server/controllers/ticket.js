@@ -50,8 +50,7 @@ exports.postTicket = function(req, res) {
             ticket.seats = req.body.seats;
             ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
             ticket.price = parseFloat(req.body.price[0]);
-            //ticket._passenger = req.decoded._id;
-            ticket._passenger = req.body.passenger;
+            ticket._passenger = req.decoded._id;
             ticket._trips = req.body.trips;
             ticket.save(function (err) {
                 if (err) {
@@ -69,8 +68,7 @@ exports.postTicket = function(req, res) {
             ticket.seats = req.body.seats;
             ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
             ticket.price = parseFloat(req.body.price[0]) + parseFloat(req.body.price[1]);
-            //ticket._passenger = req.decoded._id;
-            ticket._passenger = req.body.passenger;
+            ticket._passenger = req.decoded._id;
             ticket._trips = req.body.trips;
             ticket.connection = {
                 "trip": req.body.trips[1],
