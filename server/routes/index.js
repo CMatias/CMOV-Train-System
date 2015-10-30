@@ -74,7 +74,7 @@ router.route('/tickets/:trip_id')
     .get(ticketController.getTicketsByTrip);
 
 router.route('/tickets/uploadinfo')
-    .post(tripController.putTripInfo);
+    .post(ticketController.putTripInfo);
 
 //Trip Routes
 router.route('/trips')

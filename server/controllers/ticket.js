@@ -59,7 +59,7 @@ exports.postTicket = function(req, res) {
     }
 };
 
-exports.postTripInfo = function(req, res) {
+exports.putTripInfo = function(req, res) {
     for(var i = 0; i < req.body.tickets.length; i++) {
         Ticket.findById(req.body.tickets[i].id, function(err, ticket) {
             if (err) {

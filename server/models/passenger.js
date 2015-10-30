@@ -20,7 +20,6 @@ var PassengerSchema = new Schema({
     password: {
         type: String,
         required: 'A Passenger must have a password.',
-        validate: validators.isAlphanumeric()
     },
     creditcards: [
         {
