@@ -38,7 +38,20 @@ exports.postTicket = function(req, res) {
     if(ccardMsg == "Denied") {
         res.json("Credit Card Denied");
     } else {
-        if(req.body.trips.length > 0 && req.body.trips.length <= 2){
+        if(req.body.trips.length == 1){
+            var ticket = new Ticket();
+            ticket.seat = req.body.seats[i];
+            ticket.price = req.body.price[i];
+            ticket._passenger = req.decoded._id;
+            ticket._trip = req.body.trips[i];
+            ticket.save(function (err) {
+                if (err) {
+                    res.send(err);
+                }
+            });
+            res.json(ticket);
+        } else if (req.body.trips.length == 2){
+            var ret = [];
             for(var i = 0; i < req.body.seats.length; i++) {
                 var ticket = new Ticket();
                 ticket.seat = req.body.seats[i];
@@ -46,15 +59,22 @@ exports.postTicket = function(req, res) {
                 ticket._passenger = req.decoded._id;
                 ticket._trip = req.body.trips[i];
 
+                if(i == 1){
+                    ticket.connection = {
+                        "trip": req.body.trips[0].id,
+                        "waitingtime": req.body.waitingtime
+                    };
+                }
 
                 ticket.save(function (err) {
                     if (err) {
                         res.send(err);
                     }
-                })
-            }
-            res.json("Tickets created.");
+                });
 
+                ret.push(ticket);
+            }
+            res.json(ret);
         } else {
             res.json("Invalid Trips Defined.");
         }

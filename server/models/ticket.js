@@ -25,6 +25,9 @@ var TicketSchema = new Schema({
     used: {
         type: Boolean,
         default: false
+    },
+    connection: {
+        type: Schema.Types.Mixed
     }
 });
 
