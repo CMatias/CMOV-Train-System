@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical|center_horizontal">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select carriage: "
+            android:id="@+id/textView"
+            android:gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spCarriage"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seatsHolder"
+        android:layout_gravity="center_horizontal">
+
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat01"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat02"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:background="@drawable/freeseat" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:id="@+id/ivCorridor1"
+            android:background="#ccc" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat03"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat04"
+            android:layout_row="0"
+            android:layout_column="4"
+            android:background="@drawable/freeseat" />
+
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat05"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat06"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:background="@drawable/freeseat" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:id="@+id/ivCorridor2"
+            android:background="#ccc" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat07"
+            android:layout_row="1"
+            android:layout_column="3"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat08"
+            android:layout_row="1"
+            android:layout_column="4"
+            android:background="@drawable/freeseat" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat09"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat10"
+            android:layout_row="2"
+            android:layout_column="1"
+            android:background="@drawable/freeseat" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:id="@+id/ivCorridor3"
+            android:background="#ccc" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat11"
+            android:layout_row="2"
+            android:layout_column="3"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat12"
+            android:layout_row="2"
+            android:layout_column="4"
+            android:background="@drawable/freeseat" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat13"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat14"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:background="@drawable/freeseat" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:layout_row="3"
+            android:layout_column="2"
+            android:id="@+id/ivCorridor4"
+            android:background="#ccc" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat15"
+            android:layout_row="3"
+            android:layout_column="3"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat16"
+            android:layout_row="3"
+            android:layout_column="4"
+            android:background="@drawable/freeseat" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat17"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat18"
+            android:layout_row="4"
+            android:layout_column="1"
+            android:background="@drawable/freeseat" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="40dp"
+            android:layout_row="4"
+            android:layout_column="2"
+            android:id="@+id/ivCorridor5"
+            android:background="#ccc" />
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat19"
+            android:layout_row="4"
+            android:layout_column="3"
+            android:background="@drawable/freeseat" />
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/ibSeat20"
+            android:layout_row="4"
+            android:layout_column="4"
+            android:background="@drawable/freeseat" />
+
+
+    </GridLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="63dp">
+
+    </LinearLayout>
+
+
+</LinearLayout>
