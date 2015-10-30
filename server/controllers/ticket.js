@@ -6,6 +6,21 @@ var creditCardVerifier = require('./creditcardservice');
 exports.getTickets = function(req, res) {
     Ticket
         .find({
+
+        })
+        .populate([{path:'_trip'}, {path:'_passenger'}])
+        .exec(function (err, tickets) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(tickets);
+        });
+};
+
+/*
+exports.getTickets = function(req, res) {
+    Ticket
+        .find({
             "_passenger" : req.decoded._id,
             "used": false
         })
@@ -17,6 +32,7 @@ exports.getTickets = function(req, res) {
             res.json(tickets);
         });
 };
+*/
 
 exports.getTicketsByTrip = function(req, res) {
     Ticket
@@ -40,7 +56,10 @@ exports.postTicket = function(req, res) {
     } else {
         if(req.body.trips.length == 1){
             var ticket = new Ticket();
+            ticket.arrival = req.body.arrival;
+            ticket.departure = req.body.departure;
             ticket.seat = req.body.seats[i];
+            ticket.duration = new Date(req.body.arrival.date - req.body.departure.date);
             ticket.price = req.body.price[i];
             ticket._passenger = req.decoded._id;
             ticket._trip = req.body.trips[i];
@@ -54,6 +73,9 @@ exports.postTicket = function(req, res) {
             var ret = [];
             for(var i = 0; i < req.body.seats.length; i++) {
                 var ticket = new Ticket();
+                ticket.arrival = req.body.arrival;
+                ticket.departure = req.body.departure;
+                ticket.duration = new Date(req.body.arrival.date - req.body.departure.date);
                 ticket.seat = req.body.seats[i];
                 ticket.price = req.body.price[i];
                 ticket._passenger = req.decoded._id;

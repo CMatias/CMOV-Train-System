@@ -2,6 +2,30 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TicketSchema = new Schema({
+    departure: {
+        station: {
+            type: String,
+            required: 'A Ticket must have a departure station.'
+        },
+        date: {
+            type: Date,
+            required: 'A Station must have a date.'
+        }
+    },
+    arrival: {
+        station: {
+            type: String,
+            required: 'A Ticket must have an arrival station.'
+        },
+        date: {
+            type: Date,
+            required: 'A Station must have a date.'
+        }
+    },
+    duration: {
+        type: Date,
+        required: 'A Ticket must have a duration.'
+    },
     seat: {
         type: Number,
         min: 0,

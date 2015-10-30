@@ -9,7 +9,7 @@ module.exports = function(fixtures) {
         Trip: [
             {
                 "_id": mongoose.Types.ObjectId(),
-                "currentCapacity": "118",
+                "currentCapacity": "119",
                 "maxCapacity": "120",
                 "train": "A-B-1",
                 "stops": [
@@ -87,7 +87,7 @@ module.exports = function(fixtures) {
             },
             {
                 "_id": mongoose.Types.ObjectId(),
-                "currentCapacity": "70",
+                "currentCapacity": "69",
                 "maxCapacity": "70",
                 "train": "C-MS-1",
                 "stops": [
