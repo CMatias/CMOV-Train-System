@@ -26,11 +26,14 @@ var TicketSchema = new Schema({
         type: Date,
         required: 'A Ticket must have a duration.'
     },
-    seat: {
-        type: Number,
-        min: 0,
-        required: 'A Ticket must have a seat.'
-    },
+    seats: [
+        {
+            type: Number,
+            min: 0,
+            required: 'A Ticket must have a seat.'
+
+        }
+    ],
     price: {
         type: Number,
         min: 0,
@@ -41,11 +44,7 @@ var TicketSchema = new Schema({
         required: 'A Ticket must be assigned to a passenger.',
         ref: 'Passenger'
     },
-    _trip: {
-        type: Schema.Types.ObjectId,
-        required: 'A Ticket must be assigned to trip.',
-        ref: 'Trip'
-    },
+    _trips: [{ type: Schema.Types.ObjectId, ref: 'Trip' }],
     used: {
         type: Boolean,
         default: false
@@ -55,5 +54,5 @@ var TicketSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Ticket', TicketSchema);
+module.exports = mongoose.model('Ticket', TicketSchema, 'Ticket');
 

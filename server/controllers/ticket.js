@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Ticket = require('../models/ticket');
-var Trip = require('../models/ticket');
+var Trip = require('../models/trip');
 var Passenger = require('../models/passenger');
 var creditCardVerifier = require('./creditcardservice');
 
@@ -38,85 +38,55 @@ exports.postTicket = function(req, res) {
 
     var keyManager =  require('./keymanager');
 
-    var ccardMsg = creditCardVerifier.verifyCreditCard(null, req.body.credicard);
+    var ccardMsg = creditCardVerifier.verifyCreditCard(null, req.body.creditcard);
     if(ccardMsg == "Denied") {
         res.json("Credit Card Denied");
     } else {
-        console.log("One Ticket");
-        var ticket = new Ticket();
-        ticket._id = mongoose.Types.ObjectId();
-        ticket.arrival = req.body.arrival;
-        ticket.departure = req.body.departure;
-        ticket.seat = req.body.seats[0];
-        ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
-        ticket.price = req.body.price[0];
-        ticket._passenger = req.decoded._id;
-        ticket._trip = req.body.trips[0];
-        ticket.save(function (err) {
-            if (err) {
-                res.send(err);
-            }
-        });
-        var signature = keyManager.getSign(ticket._id);
-        res.json({"ticket": ticket, "signature": signature});
-        /*
         if(req.body.trips.length == 1){
-            console.log("One Ticket");
             var ticket = new Ticket();
             ticket._id = mongoose.Types.ObjectId();
             ticket.arrival = req.body.arrival;
             ticket.departure = req.body.departure;
-            ticket.seat = req.body.seats[0];
+            ticket.seats = req.body.seats;
             ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
-            ticket.price = req.body.price[0];
+            ticket.price = parseFloat(req.body.price[0]);
             //ticket._passenger = req.decoded._id;
             ticket._passenger = req.body.passenger;
-            ticket._trip = req.body.trips[0];
+            ticket._trips = req.body.trips;
             ticket.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
+                var signature = keyManager.getSign(ticket._id);
+                res.json({"ticket": ticket, "signature": signature});
             });
-            var signature = keyManager.getSign(ticket._id);
-            res.json({"ticket": ticket, "signature": signature});
 
         } else if (req.body.trips.length == 2){
-            console.log("Two Tickets");
-            var ret = [];
-            for(var i = 0; i < req.body.seats.length; i++) {
-                var ticket = new Ticket();
-                ticket._id = mongoose.Types.ObjectId();
-                ticket.arrival = req.body.arrival;
-                ticket.departure = req.body.departure;
-                ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
-                ticket.seat = req.body.seats[i];
-                ticket.price = req.body.price[i];
-                //ticket._passenger = req.decoded._id;
-                ticket._passenger = req.body.passenger;
-                ticket._trip = req.body.trips[i];
-
-                if(i == 1){
-                    ticket.connection = {
-                        "trip": req.body.trips[0].id,
-                        "waitingtime": req.body.waitingtime
-                    };
+            var ticket = new Ticket();
+            ticket._id = mongoose.Types.ObjectId();
+            ticket.arrival = req.body.arrival;
+            ticket.departure = req.body.departure;
+            ticket.seats = req.body.seats;
+            ticket.duration = new Date(new Date(req.body.arrival.date) - new Date(req.body.departure.date));
+            ticket.price = parseFloat(req.body.price[0]) + parseFloat(req.body.price[1]);
+            //ticket._passenger = req.decoded._id;
+            ticket._passenger = req.body.passenger;
+            ticket._trips = req.body.trips;
+            ticket.connection = {
+                "trip": req.body.trips[1],
+                "waitingtime": req.body.waitingtime
+            };
+            ticket.save(function (err) {
+                if (err) {
+                    res.send(err);
                 }
-
-                ticket.save(function (err) {
-                    if (err) {
-                        res.send(err);
-                    }
-                });
-
                 var signature = keyManager.getSign(ticket._id);
-                ret.push({"ticket": ticket, "signature": signature});
-            }
-            res.send(ret);
+                res.json({"ticket": ticket, "signature": signature});
+            });
 
         } else {
             res.json("Invalid Trips Defined.");
         }
-        */
     }
 };
 

@@ -48,5 +48,5 @@ InspectorSchema.methods.verifyPassword = function(password, cb) {
         cb(null, isMatch);
     });
 };
-module.exports = mongoose.model('Inspector', InspectorSchema);
+module.exports = mongoose.model('Inspector', InspectorSchema, 'Inspector');
 

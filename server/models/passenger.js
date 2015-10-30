@@ -67,5 +67,5 @@ PassengerSchema.methods.verifyPassword = function(password, cb) {
     });
 };
 
-module.exports = mongoose.model('Passenger', PassengerSchema);
+module.exports = mongoose.model('Passenger', PassengerSchema, 'Passenger');
 

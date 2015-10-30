@@ -19,10 +19,10 @@ module.exports = function(fixtures) {
                 "departure":  { "station": "A", "date": today.setHours(8, 0, 0)},
                 "arrival": { "station": "MS", "date": today.setHours(9, 45, 0)},
                 "duration": new Date(6300000), //1h45min in ms.
-                "seat": "98",
-                "price": "7.5",
+                "seats": ["98", "44"],
+                "price": "12.5",
                 "_passenger": p1Id,
-                "_trip": t1,
+                "_trips": [t1, t7],
                 "connection": {
                     "trip": t7,
                     "waitingtime": {
@@ -33,19 +33,10 @@ module.exports = function(fixtures) {
                 }
             },
             {
-                "departure": { "station": "MS", "date": today.setHours(10, 0, 0)},
-                "arrival": { "station": "C", "date": today.setHours(11, 0, 0)},
-                "duration": new Date(3600000),
-                "seat": "98",
-                "price": "7.5",
-                "_passenger": p1Id,
-                "_trip": t7
-            },
-            {
                 "departure":  { "station": "B", "date": today.setHours(8, 0, 0)},
                 "arrival":  { "station": "A", "date": today.setHours(11, 30, 0)},
                 "duration": new Date(12600000),
-                "seat": "28",
+                "seats": ["28"],
                 "price": "12.5",
                 "_passenger": p2Id,
                 "_trip": t2
@@ -54,7 +45,7 @@ module.exports = function(fixtures) {
                 "departure":   { "station": "A", "date": today.setHours(13, 0, 0)},
                 "arrival":  { "station": "B", "date": today.setHours(16, 30, 0)},
                 "duration": new Date(12600000),
-                "seat": "11",
+                "seats": ["11"],
                 "price": "12.5",
                 "_passenger": p3Id,
                 "_trip": t3

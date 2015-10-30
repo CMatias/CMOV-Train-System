@@ -17,5 +17,10 @@ module.exports = function(){
         return key.sign(data,'binary');
     };
 
+    KeyManager.prototype.verify = function(data){
+        var key = this._generateKey();
+        return key.verify(key.public, data);
+    };
+
     return new KeyManager();
 }();
