@@ -23,7 +23,7 @@ exports.getTickets = function(req, res) {
 exports.getTicketsByTrip = function(req, res) {
     Ticket
         .find({
-            "_trip" : req.params.trip_id
+            "_trips" : req.params.trip_id 
         })
         .populate([{path:'_trip'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
@@ -88,14 +88,10 @@ exports.postTicket = function(req, res) {
     }
 };
 
-var prepareRes = function(err, res, data){
-
-    console.log(data);
-};
 
 exports.putTripInfo = function(req, res) {
     for(var i = 0; i < req.body.tickets.length; i++) {
-        Ticket.findById(req.body.tickets[i].id, function(err, ticket) {
+        Ticket.findById(req.body.tickets[i], function(err, ticket) {
             if (err) {
                 res.send(err);
             }
