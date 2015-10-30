@@ -1,6 +1,7 @@
 var Passenger = require('../models/passenger');
 var Inspector = require('../models/inspector');
 var jwt = require('jsonwebtoken');
+//var KeyManager = require('./keymanager');
 
 exports.authPassenger = function(req, res) {
     Passenger.findOne({
@@ -56,3 +57,8 @@ exports.authInspector = function(req, res) {
     });
 };
 
+exports.getPublicKey = function(req, res){
+    var keyManager =  require('./keymanager');
+    var publicKey = keyManager.getKeyPair().public;
+    res.json(publicKey);
+};

@@ -79,7 +79,6 @@ exports.getTripsByDateAndStations = function(req, res) {
                     }
                 }
             }
-
             prepareRes(null, res, ret);
         });
 

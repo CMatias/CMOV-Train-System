@@ -18,6 +18,7 @@ router.route('/inspector/authenticate')
 router.route('/passenger')
     .post(passengerController.postPassenger);
 
+
 router.use(function(req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -40,9 +41,13 @@ router.use(function(req, res, next) {
     }
 });
 
+
 router.get('/', function (req, res) {
     res.json({message: 'Welcome to CMOV TrainTicketSystem API!'});
 });
+
+router.route('/publickey')
+    .get(authController.getPublicKey);
 
 //Passenger Routes
 router.route('/passengers')
