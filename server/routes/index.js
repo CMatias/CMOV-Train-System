@@ -15,9 +15,8 @@ router.route('/passenger/authenticate')
 router.route('/inspector/authenticate')
     .post(authController.authInspector);
 
-router.route('/passengers')
+router.route('/passenger')
     .post(passengerController.postPassenger);
-
 
 router.use(function(req, res, next) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -41,7 +40,6 @@ router.use(function(req, res, next) {
     }
 });
 
-
 router.get('/', function (req, res) {
     res.json({message: 'Welcome to CMOV TrainTicketSystem API!'});
 });
@@ -59,6 +57,7 @@ router.route('/passenger/creditcards')
     .get(passengerController.getCreditCards)
     .post(passengerController.postCreditCards);
 
+
 //Inspector Routes
 router.route('/inspectors')
     .get(inspectorController.getInspectors);
@@ -73,6 +72,9 @@ router.route('/tickets')
 
 router.route('/tickets/:trip_id')
     .get(ticketController.getTicketsByTrip);
+
+router.route('/tickets/uploadinfo')
+    .post(tripController.putTripInfo);
 
 //Trip Routes
 router.route('/trips')

@@ -54,7 +54,6 @@ exports.getTripsByDateAndStations = function(req, res) {
                 var stops = trips[i].stops;
                 var foundDep = -1;
                 var foundCentral = -1;
-                var tripArray = [];
                 for(var j = 0; j < stops.length; j++){
                     if(stops[j].station == depStation){
                         foundDep = j;
@@ -66,25 +65,22 @@ exports.getTripsByDateAndStations = function(req, res) {
                         var temp = trips[i].toObject();
                         var traveledStation = j+1-foundDep;
                         temp.price = traveledStation * 2.50;
-                        console.log(temp);
+                        temp.order = "1";
                         trips[i] = temp;
-                        tripArray.push(trips[i]);
+                        ret.push(trips[i]);
                     } else if (stops[j].station == arrStation && foundCentral > -1){
                         trips[i].stops = stops.slice(foundCentral, j+1);
                         var temp = trips[i].toObject();
                         var traveledStation = j+1-foundCentral;
                         temp.price = traveledStation * 2.50;
-                        console.log(temp);
+                        temp.order = "2";
                         trips[i] = temp;
-                        tripArray.push(trips[i]);
+                        ret.push(trips[i]);
                     }
-                }
-                for(var k = 0; k < tripArray.length; k++){
-
                 }
             }
 
-            res.json(ret);
+            prepareRes(null, res, ret);
         });
 
     } else {
@@ -112,8 +108,46 @@ exports.getTripsByDateAndStations = function(req, res) {
                 }
             }
 
-            res.json(ret);
+           res.json(ret);
         });
+    }
+};
+
+var prepareRes = function(err, res, data){
+
+    if(err) {
+        throw err;
+    }
+    else{
+        var ret = [];
+        for(var i = 0; i < data.length; i++){
+            if(data[i].order == "1"){
+                console.log("Found order 1:" + data.train);
+
+                for(var j = 0; j < data.length; j++){
+                    if(data[j].order == "2"){
+                        var retObj = [];
+                        var arrAtMs = data[i].stops[data[i].stops.length-1].date;
+                        var depAtMs = data[j].stops[0].date;
+                        var timeDiff = depAtMs - arrAtMs;
+                        //Check if waiting time less than 5 hours and positive.
+                        if(timeDiff < 18000000 && timeDiff > 0) {
+                            var timeDiffDate = new Date(timeDiff);
+                            var timeDiffObj = {
+                                "hours": timeDiffDate.getHours(),
+                                "minutes": timeDiffDate.getMinutes(),
+                                "seconds": timeDiffDate.getSeconds()
+                            };
+                            retObj.push(data[i]);
+                            retObj.push(data[j]);
+                            retObj.push(timeDiffObj);
+                            ret.push(retObj);
+                        }
+                    }
+                }
+            }
+        }
+        res.json(ret);
     }
 };
 
