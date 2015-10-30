@@ -6,21 +6,6 @@ var creditCardVerifier = require('./creditcardservice');
 exports.getTickets = function(req, res) {
     Ticket
         .find({
-
-        })
-        .populate([{path:'_trip'}, {path:'_passenger'}])
-        .exec(function (err, tickets) {
-            if (err) {
-                res.send(err);
-            }
-            res.json(tickets);
-        });
-};
-
-/*
-exports.getTickets = function(req, res) {
-    Ticket
-        .find({
             "_passenger" : req.decoded._id,
             "used": false
         })
@@ -32,7 +17,6 @@ exports.getTickets = function(req, res) {
             res.json(tickets);
         });
 };
-*/
 
 exports.getTicketsByTrip = function(req, res) {
     Ticket
