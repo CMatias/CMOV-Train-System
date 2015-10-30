@@ -127,20 +127,34 @@ var prepareRes = function(err, res, data){
                 for(var j = 0; j < data.length; j++){
                     if(data[j].order == "2"){
                         var retObj = [];
+                        var depAtDep =  data[i].stops[0].date;
+                        var arrAtArr =  data[i].stops[data[i].stops.length-1].date;
                         var arrAtMs = data[i].stops[data[i].stops.length-1].date;
                         var depAtMs = data[j].stops[0].date;
                         var timeDiff = depAtMs - arrAtMs;
+                        var timeDur = arrAtArr - depAtDep;
                         //Check if waiting time less than 5 hours and positive.
                         if(timeDiff < 18000000 && timeDiff > 0) {
                             var timeDiffDate = new Date(timeDiff);
                             var timeDiffObj = {
-                                "hours": timeDiffDate.getHours(),
-                                "minutes": timeDiffDate.getMinutes(),
-                                "seconds": timeDiffDate.getSeconds()
+                                "waitingTime": {
+                                    "hours": timeDiffDate.getHours(),
+                                    "minutes": timeDiffDate.getMinutes(),
+                                    "seconds": timeDiffDate.getSeconds()
+                                }
+                            };
+                            var timeDurDate = new Date(timeDur);
+                            var timeDurObj = {
+                                "tripDuration": {
+                                    "hours": timeDurDate.getHours(),
+                                    "minutes": timeDurDate.getMinutes(),
+                                    "seconds": timeDurDate.getSeconds()
+                                }
                             };
                             retObj.push(data[i]);
                             retObj.push(data[j]);
                             retObj.push(timeDiffObj);
+                            retObj.push(timeDurObj);
                             ret.push(retObj);
                         }
                     }
