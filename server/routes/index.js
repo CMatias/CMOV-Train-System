@@ -82,6 +82,9 @@ router.route('/tickets/uploadinfo')
     .post(ticketController.putTripInfo);
 
 //Trip Routes
+router.route('/trip/seats/:trip_id')
+    .get(ticketController.getTripSeats);
+
 router.route('/trips')
     .get(tripController.getTrips);
 
@@ -94,7 +97,6 @@ router.route('/trips/:year/:month/:day/:departure/:arrival')
 router.route('/trip/:trip_id')
     .get(tripController.getTrip);
 
-router.route('/trip/seats/:trip_id')
-    .get(tripController.getTripSeats);
+
 
 module.exports = router;
