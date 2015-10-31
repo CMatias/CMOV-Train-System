@@ -125,11 +125,11 @@ var prepareRes = function(err, res, data){
                     if(data[j].order == "2"){
                         var retObj = [];
                         var depAtDep =  data[i].stops[0].date;
-                        var arrAtArr =  data[j].stops[data[j].stops.length-1].date;
                         var arrAtMs = data[i].stops[data[i].stops.length-1].date;
+                        var arrAtArr =  data[j].stops[data[j].stops.length-1].date;
                         var depAtMs = data[j].stops[0].date;
-                        var timeDiff = depAtMs - arrAtMs;
-                        var timeDur = arrAtArr - depAtDep;
+                        var timeDiff = new Date(depAtMs) - new Date(arrAtMs);
+                        var timeDur = new Date(arrAtArr) - new Date(depAtDep);
                         //Check if waiting time less than 5 hours and positive.
                         if(timeDiff < 18000000 && timeDiff > 0) {
                             var timeDiffDate = new Date(timeDiff);
