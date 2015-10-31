@@ -52,12 +52,12 @@ exports.postTicket = function(req, res) {
             ticket.price = parseFloat(req.body.price[0]);
             ticket._passenger = req.decoded._id;
             ticket._trips = req.body.trips;
+            ticket.signature = keyManager.getSign(ticket._id);
             ticket.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
-                var signature = keyManager.getSign(ticket._id);
-                res.json({"ticket": ticket, "signature": signature});
+                res.json({"ticket": ticket});
             });
 
         } else if (req.body.trips.length == 2){
@@ -74,12 +74,12 @@ exports.postTicket = function(req, res) {
                 "trip": req.body.trips[1],
                 "waitingtime": req.body.waitingtime
             };
+            ticket.signature = keyManager.getSign(ticket._id);
             ticket.save(function (err) {
                 if (err) {
                     res.send(err);
                 }
-                var signature = keyManager.getSign(ticket._id);
-                res.json({"ticket": ticket, "signature": signature});
+                res.json({"ticket": ticket});
             });
 
         } else {

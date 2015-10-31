@@ -51,6 +51,9 @@ var TicketSchema = new Schema({
     },
     connection: {
         type: Schema.Types.Mixed
+    },
+    signature: {
+        type: Schema.Types.Mixed
     }
 });
 

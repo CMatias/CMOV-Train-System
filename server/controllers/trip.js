@@ -23,7 +23,6 @@ exports.getTripsByDate = function(req, res) {
         if (err) {
             res.send(err);
         }
-        console.log(trips.length);
         res.json(trips);
     });
 };
@@ -100,9 +99,19 @@ exports.getTripsByDateAndStations = function(req, res) {
                         var temp = trips[i].toObject();
                         var traveledStation = j+1-foundDep;
                         temp.price = traveledStation * 2.50;
-                        console.log(temp);
                         trips[i] = temp;
-                        ret.push(trips[i]);
+                        var timeDurDate = new Date(new Date(trips[i].stops[trips[i].stops.length-1].date) - new Date(trips[i].stops[0].date));
+                        var timeDurObj = {
+                            "tripDuration": {
+                                "hours": timeDurDate.getHours(),
+                                "minutes": timeDurDate.getMinutes(),
+                                "seconds": timeDurDate.getSeconds()
+                            }
+                        };
+                        var retObj = [];
+                        retObj.push(trips[i]);
+                        retObj.push(timeDurObj);
+                        ret.push(retObj);
                     }
                 }
             }
