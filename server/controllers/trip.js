@@ -121,13 +121,11 @@ var prepareRes = function(err, res, data){
         var ret = [];
         for(var i = 0; i < data.length; i++){
             if(data[i].order == "1"){
-                console.log("Found order 1:" + data.train);
-
                 for(var j = 0; j < data.length; j++){
                     if(data[j].order == "2"){
                         var retObj = [];
                         var depAtDep =  data[i].stops[0].date;
-                        var arrAtArr =  data[i].stops[data[i].stops.length-1].date;
+                        var arrAtArr =  data[j].stops[data[j].stops.length-1].date;
                         var arrAtMs = data[i].stops[data[i].stops.length-1].date;
                         var depAtMs = data[j].stops[0].date;
                         var timeDiff = depAtMs - arrAtMs;
