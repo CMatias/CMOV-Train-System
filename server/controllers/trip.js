@@ -173,19 +173,6 @@ exports.getTrip = function(req, res) {
 };
 
 
-exports.getTripSeats = function(req, res) {
-    Ticket.find({"_trip": req.params.trip_id}, function (err, tickets) {
-        if (err) {
-            res.send(err);
-        }
 
-        var ret = [];
-        for(var i = 0; i < tickets.length; i++) {
-            ret.push(tickets[i].seat);
-        }
-
-        res.json(ret);
-    });
-};
 
 

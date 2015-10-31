@@ -23,7 +23,7 @@ exports.getTickets = function(req, res) {
 exports.getTicketsByTrip = function(req, res) {
     Ticket
         .find({
-            "_trips" : req.params.trip_id 
+            "_trips" : req.params.trip_id
         })
         .populate([{path:'_trip'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
@@ -106,4 +106,20 @@ exports.putTripInfo = function(req, res) {
     res.json("Uploaded Trip Info");
 };
 
+exports.getTripSeats = function(req, res) {
+    Ticket.find({"_trips": req.params.trip_id}, function (err, tickets) {
+        if (err) {
+            res.send(err);
+        }
+        var ret = [];
+        for(var i = 0; i < tickets.length; i++) {
+            if(tickets[i]._trips[0] == req.params.trip_id){
+                ret = ret.concat(tickets[i].seats[0]);
+            } else {
+                ret = ret.concat(tickets[i].seats[1]);
+            }
+        }
 
+        res.json(ret);
+    });
+};
