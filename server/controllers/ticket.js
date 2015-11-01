@@ -11,7 +11,7 @@ exports.getTickets = function(req, res) {
             "_passenger" : req.decoded._id,
             "used": false
         })
-        .populate([{path:'_trip'}, {path:'_passenger'}])
+        .populate([{path:'_trips'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
             if (err) {
                 res.send(err);
@@ -25,7 +25,7 @@ exports.getTicketsByTrip = function(req, res) {
         .find({
             "_trips" : req.params.trip_id
         })
-        .populate([{path:'_trip'}, {path:'_passenger'}])
+        .populate([{path:'_trips'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
             if (err) {
                 res.send(err);

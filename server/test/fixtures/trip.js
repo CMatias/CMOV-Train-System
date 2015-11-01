@@ -11,7 +11,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "119",
                 "maxCapacity": "120",
-                "train": "A-B-1",
+                "train": "A-B-1-TD",
                 "stops": [
                     { "station": "A", "date": today.setHours(8, 0, 0)},
                     { "station": "A-MS", "date": today.setHours(8, 52, 30)},
@@ -24,7 +24,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "119",
                 "maxCapacity": "120",
-                "train": "B-A-1",
+                "train": "B-A-1-TD",
                 "stops": [
                     { "station": "B", "date": today.setHours(8, 0, 0)},
                     { "station": "B-MS", "date": today.setHours(8, 52, 30)},
@@ -37,7 +37,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "119",
                 "maxCapacity": "120",
-                "train": "A-B-2",
+                "train": "A-B-2-TD",
                 "stops": [
                     { "station": "A", "date": today.setHours(13, 0, 0)},
                     { "station": "A-MS", "date": today.setHours(13, 52, 30)},
@@ -50,7 +50,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "B-A-2",
+                "train": "B-A-2-TD",
                 "stops": [
                     { "station": "B", "date": today.setHours(13, 0, 0)},
                     { "station": "B-MS", "date": today.setHours(13, 52, 30)},
@@ -63,7 +63,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "A-B-3",
+                "train": "A-B-3-TD",
                 "stops": [
                     { "station": "A", "date": today.setHours(17, 0, 0)},
                     { "station": "A-MS", "date": today.setHours(17, 52, 30)},
@@ -76,7 +76,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "B-A-3",
+                "train": "B-A-3-TD",
                 "stops": [
                     { "station": "B", "date": today.setHours(17, 0, 0)},
                     { "station": "B-MS", "date": today.setHours(17, 52, 30)},
@@ -87,9 +87,9 @@ module.exports = function(fixtures) {
             },
             {
                 "_id": mongoose.Types.ObjectId(),
-                "currentCapacity": "69",
+                "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-1",
+                "train": "C-MS-1-TD",
                 "stops": [
                     { "station": "C", "date": today.setHours(10, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(10, 30, 0)},
@@ -98,9 +98,9 @@ module.exports = function(fixtures) {
             },
             {
                 "_id": mongoose.Types.ObjectId(),
-                "currentCapacity": "70",
+                "currentCapacity": "69",
                 "maxCapacity": "70",
-                "train": "MS-C-1",
+                "train": "MS-C-1-TD",
                 "stops": [
                     { "station": "MS", "date": today.setHours(10, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(10, 30, 0)},
@@ -111,7 +111,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-2",
+                "train": "C-MS-2-TD",
                 "stops": [
                     { "station": "C", "date": today.setHours(15, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(15, 30, 0)},
@@ -122,7 +122,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "MS-C-2",
+                "train": "MS-C-2-TD",
                 "stops": [
                     { "station": "MS", "date": today.setHours(15, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(15, 30, 0)},
@@ -133,7 +133,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-3",
+                "train": "C-MS-3-TD",
                 "stops": [
                     { "station": "C", "date": today.setHours(20, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(20, 30, 0)},
@@ -144,7 +144,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "MS-C-3",
+                "train": "MS-C-3-TD",
                 "stops": [
                     { "station": "MS", "date": today.setHours(20, 0, 0)},
                     { "station": "C-MS", "date": today.setHours(20, 30, 0)},
@@ -155,7 +155,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "A-B-1",
+                "train": "A-B-1-TM",
                 "stops": [
                     { "station": "A", "date": tomorrow.setHours(8, 0, 0)},
                     { "station": "A-MS", "date": tomorrow.setHours(8, 52, 30)},
@@ -168,7 +168,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "B-A-1",
+                "train": "B-A-1-TM",
                 "stops": [
                     { "station": "B", "date": tomorrow.setHours(8, 0, 0)},
                     { "station": "B-MS", "date": tomorrow.setHours(8, 52, 30)},
@@ -194,7 +194,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "B-A-2",
+                "train": "B-A-2-TM",
                 "stops": [
                     { "station": "B", "date": tomorrow.setHours(13, 0, 0)},
                     { "station": "B-MS", "date": tomorrow.setHours(13, 52, 30)},
@@ -207,7 +207,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "A-B-3",
+                "train": "A-B-3-TM",
                 "stops": [
                     { "station": "A", "date": tomorrow.setHours(17, 0, 0)},
                     { "station": "A-MS", "date": tomorrow.setHours(17, 52, 30)},
@@ -220,7 +220,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "120",
                 "maxCapacity": "120",
-                "train": "B-A-3",
+                "train": "B-A-3-TM",
                 "stops": [
                     { "station": "B", "date": tomorrow.setHours(17, 0, 0)},
                     { "station": "B-MS", "date": tomorrow.setHours(17, 52, 30)},
@@ -233,7 +233,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-1",
+                "train": "C-MS-1-TM",
                 "stops": [
                     { "station": "C", "date": tomorrow.setHours(10, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(10, 30, 0)},
@@ -244,7 +244,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "MS-C-1",
+                "train": "MS-C-1-TM",
                 "stops": [
                     { "station": "MS", "date": tomorrow.setHours(10, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(10, 30, 0)},
@@ -255,7 +255,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-2",
+                "train": "C-MS-2-TM",
                 "stops": [
                     { "station": "C", "date": tomorrow.setHours(15, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(15, 30, 0)},
@@ -266,7 +266,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "MS-C-2",
+                "train": "MS-C-2-TM",
                 "stops": [
                     { "station": "MS", "date": tomorrow.setHours(15, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(15, 30, 0)},
@@ -277,7 +277,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "C-MS-3",
+                "train": "C-MS-3-TM",
                 "stops": [
                     { "station": "C", "date": tomorrow.setHours(20, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(20, 30, 0)},
@@ -288,7 +288,7 @@ module.exports = function(fixtures) {
                 "_id": mongoose.Types.ObjectId(),
                 "currentCapacity": "70",
                 "maxCapacity": "70",
-                "train": "MS-C-3",
+                "train": "MS-C-3-TM",
                 "stops": [
                     { "station": "MS", "date": tomorrow.setHours(20, 0, 0)},
                     { "station": "C-MS", "date": tomorrow.setHours(20, 30, 0)},
