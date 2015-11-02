@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Ticket = require('../models/ticket');
-var Trip = require('../models/trip');
-var Passenger = require('../models/passenger');
+var tripController = require('./trip');
 var creditCardVerifier = require('./creditcardservice');
 
 
@@ -57,6 +56,7 @@ exports.postTicket = function(req, res) {
                 if (err) {
                     res.send(err);
                 }
+                tripController.reduceCapacity(req.body.trips[0]);
                 res.json({"ticket": ticket});
             });
 
@@ -79,6 +79,8 @@ exports.postTicket = function(req, res) {
                 if (err) {
                     res.send(err);
                 }
+                tripController.reduceCapacity(req.body.trips[0]);
+                tripController.reduceCapacity(req.body.trips[1]);
                 res.json({"ticket": ticket});
             });
 
