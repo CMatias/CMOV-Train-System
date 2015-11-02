@@ -130,16 +130,12 @@ exports.getTripsByDateAndStations = function(req, res) {
                         var traveledStation = j+1-foundDep;
                         temp.price = traveledStation * 2.50;
                         trips[i] = temp;
-                        var timeDepDate = new Date(trips[i].stops[0].date);
-                        var timeArrDate =  new Date(trips[i].stops[trips[i].stops.length-1].date);
-                        var timeDurHours = timeArrDate.getHours() - timeDepDate.getHours();
-                        var timeDurMins =  timeArrDate.getMinutes() - timeDepDate.getMinutes();
-                        var timeDurSecs =  timeArrDate.getSeconds() - timeDepDate.getSeconds();
+                        var timeDurDate = new Date(new Date(trips[i].stops[trips[i].stops.length-1].date) - new Date(trips[i].stops[0].date));
                         var timeDurObj = {
                             "tripDuration": {
-                                "hours": timeDurHours,
-                                "minutes": timeDurMins,
-                                "seconds": timeDurSecs
+                                "hours": timeDurDate.getHours(),
+                                "minutes": timeDurDate.getMinutes(),
+                                "seconds": timeDurDate.getSeconds()
                             }
                         };
                         var retObj = [];
@@ -168,25 +164,14 @@ var prepareRes = function(err, res, data){
                     if(data[j].order == "2"){
                         var retObj = [];
                         var depAtDep =  data[i].stops[0].date;
-                        console.log("Departure at Dep as Obj: " + data[i].stops[0].date);
-                        console.log("Departure at Dep as Date: " + new Date(data[i].stops[0].date));
                         var arrAtMs = data[i].stops[data[i].stops.length-1].date;
-                        console.log("Arrival at MS as Obj: " + data[i].stops[data[i].stops.length-1].date);
-                        console.log("Arrival at MS as Date: " + new Date(data[i].stops[data[i].stops.length-1].date));
                         var arrAtArr =  data[j].stops[data[j].stops.length-1].date;
-                        console.log("Arrival at Arr as Obj: " + data[j].stops[data[j].stops.length-1].date);
-                        console.log("Arrival at Arr as Date: " + new Date(data[j].stops[data[j].stops.length-1].date));
                         var depAtMs = data[j].stops[0].date;
-                        console.log("Departure at MS as Obj: " + data[j].stops[0].date);
-                        console.log("Departure at MS as Date: " + new Date(data[j].stops[0].date));
                         var timeDiff = new Date(depAtMs) - new Date(arrAtMs);
-                        console.log("TimeDiff: " + timeDiff);
                         var timeDur = new Date(arrAtArr) - new Date(depAtDep);
-                        console.log("TimeDur: " + timeDur);
                         //Check if waiting time less than 5 hours and positive.
                         if(timeDiff > 0 && timeDiff < 18000000) {
-                            var timeDiffDate = new Date(timeDiff);
-                            console.log("TimeDiffDate: " + timeDiffDate);
+                            var timeDiffDate = new Date(timeDiff);;
                             var timeDiffObj = {
                                 "waitingTime": {
                                     "hours": timeDiffDate.getHours(),
@@ -195,7 +180,6 @@ var prepareRes = function(err, res, data){
                                 }
                             };
                             var timeDurDate = new Date(timeDur);
-                            console.log("TimeDurDate: " + timeDurDate);
                             var timeDurObj = {
                                 "tripDuration": {
                                     "hours": timeDurDate.getHours(),
