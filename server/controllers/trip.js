@@ -130,20 +130,16 @@ exports.getTripsByDateAndStations = function(req, res) {
                         var traveledStation = j+1-foundDep;
                         temp.price = traveledStation * 2.50;
                         trips[i] = temp;
-                        console.log("Departure as Obj: " + trips[i].stops[0].date);
-                        console.log("Departure as Date: " + new Date(trips[i].stops[0].date));
-                        console.log("Arrival as Obj: " + trips[i].stops[trips[i].stops.length-1].date);
-                        console.log("Arrival as Date: " + new Date(trips[i].stops[trips[i].stops.length-1].date));
-                        var dur = new Date(trips[i].stops[trips[i].stops.length-1].date) - new Date(trips[i].stops[0].date);
-                        console.log("Dur as Obj: " + dur);
-                        console.log("Dur as Date: " + new Date(new Date(trips[i].stops[trips[i].stops.length-1].date) - new Date(trips[i].stops[0].date)));
-                        var timeDurDate = new Date(new Date(trips[i].stops[trips[i].stops.length-1].date) - new Date(trips[i].stops[0].date));
-                        console.log("TimeDurDate: " + timeDurDate + "\n");
+                        var timeDepDate = new Date(trips[i].stops[0].date);
+                        var timeArrDate =  new Date(trips[i].stops[trips[i].stops.length-1].date);
+                        var timeDurHours = timeArrDate.getHours() - timeDepDate.getHours();
+                        var timeDurMins =  timeArrDate.getMinutes() - timeDepDate.getMinutes();
+                        var timeDurSecs =  timeArrDate.getSeconds() - timeDepDate.getSeconds();
                         var timeDurObj = {
                             "tripDuration": {
-                                "hours": timeDurDate.getHours(),
-                                "minutes": timeDurDate.getMinutes(),
-                                "seconds": timeDurDate.getSeconds()
+                                "hours": timeDurHours,
+                                "minutes": timeDurMins,
+                                "seconds": timeDurSecs
                             }
                         };
                         var retObj = [];
