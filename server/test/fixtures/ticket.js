@@ -55,7 +55,7 @@ module.exports = function(fixtures) {
                         "seconds": "0"
                     }
                 },
-                "signature": keyManager.getSign(ticketId1)
+                "signature": keyManager.getSign(ticketId1.toString())
             },
             {
                 "_id": ticketId2,
@@ -66,7 +66,7 @@ module.exports = function(fixtures) {
                 "price": "12.5",
                 "_passenger": p2Id,
                 "_trips": [t2Id],
-                "signature": keyManager.getSign(ticketId2)
+                "signature": keyManager.getSign(ticketId2.toString())
             },
             {
                 "_id": ticketId3,
@@ -77,7 +77,7 @@ module.exports = function(fixtures) {
                 "price": "12.5",
                 "_passenger": p3Id,
                 "_trips": [t3Id],
-                "signature": keyManager.getSign(ticketId3)
+                "signature": keyManager.getSign(ticketId3.toString())
             }
         ]
     });
