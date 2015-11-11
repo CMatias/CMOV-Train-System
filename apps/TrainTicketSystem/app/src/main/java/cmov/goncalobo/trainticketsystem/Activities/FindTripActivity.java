@@ -67,8 +67,8 @@ public class FindTripActivity extends Activity {
         });
 
         // FROM SPINNER
-        final ArrayAdapter<CharSequence> adapterFrom = ArrayAdapter.createFromResource(this, R.array.fromStations, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapterTo = ArrayAdapter.createFromResource(this, R.array.toStations, android.R.layout.simple_spinner_item);
+        final ArrayAdapter<CharSequence> adapterFrom = ArrayAdapter.createFromResource(this, R.array.fromStations, R.layout.spinner_item);
+        ArrayAdapter<CharSequence> adapterTo = ArrayAdapter.createFromResource(this, R.array.toStations, R.layout.spinner_item);
         adapterFrom.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterTo.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -107,7 +107,7 @@ public class FindTripActivity extends Activity {
                     Utils.toast("Please select a date.",c);
                     return;
                 } else
-                if( false/*myCalendar.getTimeInMillis() <  Calendar.getInstance().getTimeInMillis()*/)
+                if( myCalendar.getTimeInMillis() <  Calendar.getInstance().getTimeInMillis()-(1000*60*60*24))
                 {
                     Utils.toast("The selected date is invalid, it belongs in the past.",c);
                     return;

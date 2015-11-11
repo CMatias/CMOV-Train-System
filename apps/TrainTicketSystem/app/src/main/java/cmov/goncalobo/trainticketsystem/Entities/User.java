@@ -9,6 +9,7 @@ public class User implements Serializable {
     private String password="";
     private String token="";
     ArrayList<PaymentCard> cards = new ArrayList<PaymentCard>();
+    private String ID;
 
 
     public String getName() {
@@ -56,5 +57,17 @@ public class User implements Serializable {
 
     public ArrayList<PaymentCard> getCards() {
         return cards;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getID(){
+        return ID;
+    }
+
+    public void clearCards() {
+        cards.clear();
     }
 }

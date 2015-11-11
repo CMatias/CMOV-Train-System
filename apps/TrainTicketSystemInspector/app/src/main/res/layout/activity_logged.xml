@@ -71,7 +71,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:text="Trips:"
-                android:id="@+id/tvFrom"
+                android:id="@+id/tvTrip"
                 android:textColor="#a92f1a"
                 android:textSize="20dp"
                 android:layout_marginLeft="8dp" />
@@ -79,7 +79,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spFrom"
+                android:id="@+id/spTrips"
                 android:layout_marginLeft="8dp" />
 
         </LinearLayout>

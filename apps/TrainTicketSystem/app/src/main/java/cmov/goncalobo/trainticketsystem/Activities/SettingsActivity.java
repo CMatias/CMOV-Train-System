@@ -24,6 +24,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import cmov.goncalobo.trainticketsystem.R;
 import cmov.goncalobo.trainticketsystem.Entities.User;
@@ -70,10 +71,34 @@ public class SettingsActivity extends Activity {
                     Utils.toast("Card number consists of a sequence of 16 digits.",c);
                     return;
                 }
-                if (!etValidity.getText().toString().matches(Utils.VALIDITY_PATTERN)) {
+
+                String validity = etValidity.getText().toString();
+
+                if (!validity.matches(Utils.VALIDITY_PATTERN)) {
                     Utils.toast("Please use the standard YYYY/MM input for card validity.", c);
                     return;
                 }
+                // current year and month
+                int year = Calendar.getInstance().get(Calendar.YEAR);
+                int month = Calendar.getInstance().get(Calendar.MONTH);
+
+                if(Integer.parseInt(validity.substring(0, validity.indexOf("/")))>=year){
+                if(Integer.parseInt(validity.substring(0, validity.indexOf("/")))==year)
+                    if(Integer.parseInt(validity.substring(validity.indexOf("/")+1,validity.length()))<=month){
+                        Utils.toast("Validity can't be a date in the past", c);
+                        return;
+                    }
+                    if(Integer.parseInt(validity.substring(validity.indexOf("/")+1,validity.length()))>12){
+                        Utils.toast("Invalid month number.", c);
+                        return;
+                    }
+                }
+                else {
+                    Utils.toast("Validity can't be a date in the past", c);
+                    return;
+                }
+
+
 
                 cardnumber = etCardNumber.getText().toString();
                 validity = etValidity.getText().toString().replace("/", "-");
@@ -88,38 +113,6 @@ public class SettingsActivity extends Activity {
 
             }
         });
-/*
- * Function to display cards *
-
-        ArrayList<String> cardsArray = new ArrayList<String>();
-        for(int i = 0; i < u.getCards().size(); i++)
-            cardsArray.add(u.getCards().get(i).display(1));
-
-
-        final Spinner spinner = (Spinner) findViewById(R.id.spCards);
-        ArrayAdapter<String> cardsArrayAdapter = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_item, cardsArray); //selected item will look like a spinner set from XML
-        cardsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(cardsArrayAdapter);
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                for(int i = 0; i < u.getCards().size();i++)
-                    if(u.getCards().get(i).getValidity().equals("true"))
-                        u.getCards().get(i).setValidity("false");
-
-                int activeCardID = (int) spinner.getSelectedItemId();
-                u.getCards().get(activeCardID).setValidity("true");
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        }); */
     }
 
     public class getResponse extends AsyncTask<String, String, String> {
@@ -194,16 +187,18 @@ public class SettingsActivity extends Activity {
                         return;
                     }
                     if(result.indexOf("Error")>0){
-                        Utils._("Unknown error occured while adding a new card.", c);
+                        Utils._("Unknown error occurred while adding a new card.", c);
                         return;
                     }
                     if(result.indexOf("success")>0){
-                        Utils._("Unknown error occured during sign up.",c);
+                        Utils._("Unknown error occurred during sign up.",c);
                         return;
                     }
-
                     Utils.toast("Card added successfully.",c);
-
+                    intent = new Intent(SettingsActivity.this, LoggedActivity.class);
+                    intent.putExtra("activeUser", u);
+                    startActivity(intent);
+                    finish();
                     break;
                 default: Utils._("Warning, unknown state!", context);
             }

@@ -137,10 +137,15 @@ public class LoggedActivity extends AuthActivity {
                     break;
                 case Utils.STATE_MY_TICKETS:
                     intent = new Intent(LoggedActivity.this, MyTicketsActivity.class);
-                    Utils._(result,c);
-                    intent.putExtra("tickets",result);
-                    intent.putExtra("activeUser", u);
-                    startActivity(intent);
+                    Utils._(result, c);
+                    if(!result.equals("[]")) {
+                        intent.putExtra("tickets", result);
+                        //intent.putExtra("activeUser", u);
+                        intent.putExtra("offline", "false");
+                        startActivity(intent);
+                    } else {
+                        Utils.toast("You have no tickets.",c);
+                    }
                     break;
                 case Utils.STATE_SETTINGS:
                     intent = new Intent(LoggedActivity.this, SettingsActivity.class);
@@ -160,6 +165,11 @@ public class LoggedActivity extends AuthActivity {
     private void parseUserInfo(String t) {
 
             ArrayList<PaymentCard> cards = new ArrayList<PaymentCard>();
+            u.clearCards();
+        u.setID(t.substring(
+                t.indexOf(":", t.indexOf("_id")) + 1,
+                t.indexOf(",", t.indexOf(":", t.indexOf("_id")))
+        ).replace("\"", ""));
 
             String[] aux = t.substring(t.indexOf("["), t.indexOf("]")).split("\\u007D,\\u007B");
 

@@ -9,16 +9,20 @@ import android.widget.Toast;
 public class Utils {
 
     // CONFIGURATION
-    private static final boolean DEBUGGER = true;
+    private static final boolean DEBUGGER = false;
 
     // API ROUTES
-    public static final String ROUTE_LOGIN      = "http://146.185.184.229:1337/api/authenticate";
-    public static final String ROUTE_GETTICKETS = "http://beta.json-generator.com/api/json/get/N10iEVyZe";
-    public static final String ROUTE_FINDTRIPS  = "http://146.185.184.229:1337/api/trips";
+    public static final String ROUTE_LOGIN      = "http://146.185.184.229:1337/api/inspector/authenticate";
+    public static final String ROUTE_GETTRIPS   = "http://146.185.184.229:1337/api/inspector/trips";
+    public static final String ROUTE_GETTICKETS = "http://146.185.184.229:1337/api/tickets/";
+    public static final String ROUTE_ENDTRIP    = "http://146.185.184.229:1337/api/tickets/uploadinfo";
+
 
     // STATES
     public static final int STATE_LOGIN          = 1;
     public static final int STATE_CONFIRM_TRIP   = 2;
+    public static final int STATE_LOAD_TRIPS     = 3;
+    public static final int STATE_END_TRIP       = 4;
 
 
     // SPINNER VALS

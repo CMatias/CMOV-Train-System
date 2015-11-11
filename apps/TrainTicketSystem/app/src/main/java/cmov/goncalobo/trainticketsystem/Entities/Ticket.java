@@ -2,12 +2,15 @@ package cmov.goncalobo.trainticketsystem.Entities;
 
 import java.io.Serializable;
 
+import cmov.goncalobo.trainticketsystem.Others.Utils;
+
 /**
  * Created by goncalobo on 20/10/2015.
  */
 public class Ticket implements Serializable {
 
     private String ID;
+    private String tripID[];
     private String from;
     private String to;
     private String departureHour;
@@ -15,10 +18,11 @@ public class Ticket implements Serializable {
     private String arrivalHour;
     private String arrivalDate;
     private String duration;
-    private String price;
+    private String price[];
     private int capacity;
     private int maxCapacity;
     private boolean isValid;
+    private String signature;
 
     public String getWaitingTime() {
         return waitingTime;
@@ -122,37 +126,37 @@ public class Ticket implements Serializable {
     }
 
     public String getDuration() {
-        if(getDeparture(2)!=null&&getArrival(2)!=null) {
-            int departureSecs =
-                    Integer.parseInt(getDeparture(2).substring(0, getDeparture(2).indexOf("h"))) * 60 * 60
-                            +
-                            Integer.parseInt(getDeparture(2).substring(getDeparture(2).indexOf("h") + 1, getDeparture(2).length())) * 60;
-
-            int arrivalSecs =
-                    Integer.parseInt(getArrival(2).substring(0, getArrival(2).indexOf("h"))) * 60 * 60
-                            +
-                            Integer.parseInt(getArrival(2).substring(getArrival(2).indexOf("h") + 1, getArrival(2).length())) * 60;
-
-            int durationSecs = arrivalSecs - departureSecs;
-
-            String hours = "" + (int)((durationSecs / 60) / 60);
-            String minutes = "" + (int)((durationSecs / 60)-(Integer.parseInt(hours)*60));
-
-            return hours+"h"+minutes;
-        }
-        else return duration;
-
+        return duration;
     }
 
     public void setDuration(String duration) {
-        this.duration = duration.substring(duration.indexOf("T")+1,duration.lastIndexOf(":")).replace(":", "h");
+        if(duration.indexOf("T")>0)
+            this.duration = duration.substring(duration.indexOf("T")+1,duration.lastIndexOf(":")).replace(":", "h");
+        else
+        {
+            if(duration.substring(0,duration.indexOf("h")).length()<2)
+                duration = "0"+duration;
+
+            if(duration.substring(duration.indexOf("h")+1,duration.length()).length()<2)
+                duration = duration.substring(0,duration.indexOf("h")+1)+"0"+duration.charAt(duration.length()-1);
+
+            this.duration = duration;
+        }
     }
 
-    public String getPrice() {
-        return price;
+    public String getPrice(int state) {
+        switch (state){
+            case 1: if(hasWaitingTime())
+                        return  price[0]+"\",\""+price[1];
+                else return price[0];
+            case 2: if(hasWaitingTime())
+                        return  ""+(Float.parseFloat(price[0])+Float.parseFloat(price[1]));
+                else return price[0];
+            default: return "Error";
+        }
     }
 
-    public void setPrice(String price) {
+    public void setPrice(String price[]) {
         this.price = price;
     }
 
@@ -181,9 +185,9 @@ public class Ticket implements Serializable {
                 if(getFrom().length()>2||getTo().length()>2)
                     return  getDeparture(1)+"\nFrom: " + getFrom() + " (" + getDeparture(2) + ")\nTo: " + getTo() + " (" + getArrival(2) +")\n"+getArrival(1);
                 else return getDeparture(1)+"\nFrom:   " + getFrom() + " (" + getDeparture(2) + ")\nTo:        " + getTo() + " (" + getArrival(2) +")\n"+getArrival(1);
-            case 2: return "\uD83D\uDCB0   " + getPrice() + "€\n⌚   " + getDuration();
+            case 2: return "\uD83D\uDCB0   " + getPrice(2) + "€\n⌚   " + getDuration();
             case 3: return "Seat\n" + getSeat();
-            case 4: return "From:   " + getFrom() + " (" + getDeparture(2) + ")\nTo:        " + getTo() + " (" + getArrival(2) +")\n\nSeat:     " + getSeat() + "\nDuration: " + getDuration();
+            case 4: return display(1)+"\nID:"+getID()+"#\nT_ID:"+getTripID(1)+"@\nSignature:" + getSignature();
             default: return "Error";
         }
     }
@@ -208,4 +212,27 @@ public class Ticket implements Serializable {
         return (waitingTime!=null);
     }
 
+    public String getTripID(int state) {
+    switch (state) {
+    case 1:
+        if(hasWaitingTime())
+        return tripID[0] + "\",\"" + tripID[1];
+    else return tripID[0];
+    case Utils.STATE_GET_SEATS:
+        return tripID[0];
+    default: return tripID[0];
+    }
+    }
+
+    public void setTripID(String[] tripID) {
+        this.tripID = tripID;
+    }
+
+    public void setSignature(String s) {
+        this.signature = s;
+    }
+
+    public String getSignature(){
+        return signature;
+    }
 }

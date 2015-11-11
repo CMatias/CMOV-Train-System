@@ -3,6 +3,7 @@ package cmov.goncalobo.trainticketsystem.Others;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import java.security.KeyPair;
@@ -20,10 +21,22 @@ import cmov.goncalobo.trainticketsystem.Entities.Ticket;
 public class QRCodeGenerator extends View {
 
     private Ticket ticket;
+    private boolean FHD, HD;
 
     public QRCodeGenerator(Context context, Ticket ticket) {
         super(context);
         this.ticket = ticket;
+        DisplayMetrics metrics = this.getResources().getDisplayMetrics();
+
+        Utils._("D:"+metrics.widthPixels+"",context);
+        if(metrics.widthPixels>=1080)
+            FHD = true;
+        else if(metrics.widthPixels>=540)
+            HD = true;
+        else {
+            FHD = false;
+            HD = false;
+        }
     }
 
     @Override
@@ -52,18 +65,13 @@ public class QRCodeGenerator extends View {
         // for example: bizcard format
         // barcode.setData("BIZCARD:N:Kelly;X:Goto;T:Design Ethnographer;C:gotomedia LLC;A:2169 Folsom Street M302;B:4158647007;F:4158647004;M:4159907005;E:kelly@gotomedia.com;;");
 
-        byte[] keyBytes = new byte[16];
 
-        for(int i = 0;i<keyBytes.length;i++)
-            keyBytes[i] = ticket.getID().getBytes()[i];
-
-        String key = generateKey(keyBytes);
-        String qrString = ticket.display(4)+"\n\n" + key;
+        String qrString = ticket.display(4);
 
         Utils._(qrString, getContext());
         Utils._("" + qrString.length(), getContext());
 
-                // a small QRcode with 68 characters
+        // a small QRcode with 68 characters
         barcode.setData(qrString);
         barcode.setDataMode(QRCode.M_AUTO);
         barcode.setVersion(1);
@@ -83,13 +91,25 @@ public class QRCodeGenerator extends View {
 
         // unit of measure for X, Y, LeftMargin, RightMargin, TopMargin, BottomMargin
         barcode.setUom(IBarcode.UOM_PIXEL);
-        // barcode module width in pixel
-        barcode.setX(9f);
 
-        barcode.setLeftMargin(30f);
-        barcode.setRightMargin(30f);
-        barcode.setTopMargin(50f);
-        barcode.setBottomMargin(50f);
+        // barcode module width in pixel
+
+        if(FHD) {
+            barcode.setX(10f);
+
+            barcode.setLeftMargin(35f);
+            barcode.setRightMargin(35f);
+            barcode.setTopMargin(50f);
+            barcode.setBottomMargin(50f);
+        }
+        else{
+            barcode.setX(4f);
+
+            barcode.setLeftMargin(21f);
+            barcode.setRightMargin(21f);
+            barcode.setTopMargin(12f);
+            barcode.setBottomMargin(12f);
+        }
         // barcode image resolution in dpi
         barcode.setResolution(72);
 
@@ -103,40 +123,6 @@ public class QRCodeGenerator extends View {
         barcode.drawBarcode(canvas, bounds);
     }
 
-    public String generateKey(byte[] i){
 
-        byte[] input = i, output;
-        String res = "", key = "";
-
-        try {
-            KeyPairGenerator kgen = KeyPairGenerator.getInstance("RSA");  //RSA keys
-            kgen.initialize(368);                                         //size in bits
-            KeyPair kp = kgen.generateKeyPair();
-            PrivateKey pri = kp.getPrivate();                             // private key in a Java class
-            PublicKey pub = kp.getPublic();                               // the corresponding public key in a Java class
-            res += ("Private: (" + pri.toString() +")\n");
-            res += ("Public: (" + pub.toString() + ")\n");
-            Signature sg = Signature.getInstance("SHA1WithRSA");          // for signing with the stated algorithm
-            sg.initSign(pri);                                             // supply the private key
-            sg.update(input);                                             // define the data to sign
-            output = sg.sign();                                           // produce the signature
-            res += ("Signature: (" + output.length + "bytes)\n");
-            key = output.toString();
-            sg.initVerify(pub);                                          // supply the public key
-            sg.update(input);                                            // supply the data to verify
-            boolean verify = sg.verify(output);                          // verify the signature (output) using the original data
-            res += ("\nverify: " + verify +"\n");
-
-            input[10] = 100;                                             // change a byte
-            res += "\nChanged data.\n";
-            sg.update(input);
-            verify = sg.verify(output);                                  // verify the signature (output) using the changed data
-            res += ("verify: " + verify +"\n");
-        }
-        catch (Exception ex) {
-            res += ex.toString();
-        }
-        return key;
-    }
 
 }

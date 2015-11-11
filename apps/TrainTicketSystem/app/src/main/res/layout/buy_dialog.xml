@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal">
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spCard"
+        android:spinnerMode="dialog" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAttention"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#dd4e41" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="clip_horizontal|center_horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="CANCEL"
+            android:id="@+id/bCancel"
+            android:background="@drawable/button_bg"
+            android:textColor="#a92f1a"
+            android:textSize="12dp"
+            android:layout_weight="0.5"
+            android:layout_marginRight="10dp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="CONFIRM"
+            android:id="@+id/bConfirm"
+            android:background="@drawable/button_bg"
+            android:textColor="#a92f1a"
+            android:textSize="12dp"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+</LinearLayout>

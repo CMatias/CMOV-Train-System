@@ -46,13 +46,10 @@ public class AuthActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
 
         c = this;
         Utils._("AuthActivity Born!", c);
-
 
         setContentView(R.layout.activity_login);
 
@@ -195,13 +192,14 @@ public class AuthActivity extends Activity {
                         Utils.toast("Please connect to the internet.", c);
                         return;
                     }
-                    int success = result.indexOf("success");
+                    int success = result.indexOf("true");
 
                     if (success > 0) {
 
                         User u = new User();
                         String token = result.replace("\"", "").replace("}", "");
-                        token = token.substring(token.indexOf("token:") + 6, token.length());
+                        token = token.substring(token.indexOf("token:") + 6, token.length()).replace(",success:true","");
+                        Utils._(token,c);
                         u.setToken(token);
                         u.setUsername(username);
                         u.setPassword(password);

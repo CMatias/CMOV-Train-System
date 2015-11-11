@@ -6,10 +6,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,9 +24,16 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,6 +46,7 @@ import cmov.goncalobo.trainticketsystem.R;
 public class TicketAdapter extends BaseAdapter{
     ArrayList<Ticket> result;
     Context context;
+    public ArrayList<Integer> seatsTaken;
     int state;
     private static Bitmap bmp;
     ProgressBar p;
@@ -76,8 +83,8 @@ public class TicketAdapter extends BaseAdapter{
         ImageView img;
     }
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-
+    public View getView(final int position, final View convertView, ViewGroup parent) {
+        seatsTaken = new ArrayList<Integer>();
         switch (state) {
             case Utils.STATE_MY_TICKETS:
                 Holder holder = new Holder();
@@ -113,8 +120,8 @@ public class TicketAdapter extends BaseAdapter{
                             Utils.toast("Ticket saved in your pictures folder.", context);*/
 
                             DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-                            float dp_w = (metrics.widthPixels)*0.5f;//197f;
-                            float dp_h = metrics.heightPixels/2;//280f;
+                            float dp_w = 197f;
+                            float dp_h = 280f;
                             int pixels_w = (int) (metrics.density * dp_w + 0.5f);
                             int pixels_h = (int) (metrics.density * dp_h + 0.5f);
 
@@ -156,11 +163,10 @@ public class TicketAdapter extends BaseAdapter{
                 holderResults.tv2.setText(result.get(position).display(2));
 
                 // ------- SEAT SELECTOR ------------ //
+                Utils._(""+result.get(position).getMaxCapacity(),context);
                 int totalseats = result.get(position).getMaxCapacity();
                 final int carriageCapacity = 20;
                 int totalCarriages = Math.abs(totalseats/carriageCapacity);
-
-                final int takenseats[] = {10,20,21,33,45,70,75,110};
 
                 seatsDialog.setContentView(R.layout.seat_selector);
 
@@ -197,33 +203,75 @@ public class TicketAdapter extends BaseAdapter{
                 seats.add((ImageButton) seatsDialog.findViewById(R.id.ibSeat19));
                 seats.add((ImageButton) seatsDialog.findViewById(R.id.ibSeat20));
 
+
+
                 // ----- BUY DIALOG  ------ //
 
-                seatsDialog.setContentView(R.layout.seat_selector);
 
                 holderResults.img.setOnClickListener(new OnClickListener() {
                     @Override
-                    public void onClick(View v) {/*
+                    public void onClick(View v) {
                         if(holderResults.tv3.getText().equals("Pick\nSeat")) {
                             Utils.toast("Pick a seat first please.",context);
                             return;
-                        }*/
-                        TextView t = new TextView(context);
-                        t.setText("sadasda");
+                        }
+                        buyDialog.setContentView(R.layout.buy_dialog);
                         ArrayList<String> cardsArray = new ArrayList<String>();
                         for(int i = 0; i < LoggedActivity.u.getCards().size(); i++)
                             cardsArray.add(LoggedActivity.u.getCards().get(i).display(1));
 
+                        buyDialog.setTitle("Select Payment Card:");
 
-                        Spinner cardSpinner = new Spinner(context);
-                        ArrayAdapter<String> cardsArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_expandable_list_item_1, cardsArray); //selected item will look like a spinner set from XML
+                        Spinner cardSpinner = (Spinner) buyDialog.findViewById(R.id.spCard);
+                        ArrayAdapter<String> cardsArrayAdapter = new ArrayAdapter<String>(context, R.layout.spinner_item, cardsArray); //selected item will look like a spinner set from XML
                         cardsArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         cardSpinner.setAdapter(cardsArrayAdapter);
 
+                        TextView warning = (TextView) buyDialog.findViewById(R.id.tvAttention);
+
+                        if(result.get(position).hasWaitingTime())
+                            warning.setText("Attention! This trip has a waiting\ntime of " +result.get(position).getWaitingTime()+" at the Main Station!");
+
+                        final String jsonBuy = "" +
+                                "{"  +
+                                "\"departure\":"+
+                                "{"  +
+                                    "\"station\":\"" + result.get(position).getFrom().replace("M. Station","MS") + "\"," +
+                                    "\"date\":\"" + result.get(position).getDeparture(1)+"T"+result.get(position).getDeparture(2).replace("h",":") + ":00.973Z\"" +
+                                "}," +
+                                "\"arrival\":" +
+                                "{"  +
+                                    "\"station\":\"" + result.get(position).getTo().replace("M. Station","MS") + "\"," +
+                                    "\"date\":\""    + result.get(position).getArrival(1)+"T"+result.get(position).getArrival(2).replace("h",":") + ":00.973Z\"" +
+                                "}," +
+                                "\"duration\":\"1970-01-01" +"T"+ result.get(position).getDuration().replace("h",":") + ":00.000Z\"," +
+                                "\"seats\":[\""+holderResults.tv3.getText().toString().replace("Seat\n","")+"\"]," +
+                                "\"price\":[\""+result.get(position).getPrice(1).replace("€","")+"\"]," +
+                                "\"trips\":[\"" + result.get(position).getTripID(1) + "\"]" +
+                                "}";
 
 
-                        buyDialog.setContentView(cardSpinner);
+                        buyDialog.getWindow().setBackgroundDrawable(context.getResources().getDrawable(R.drawable.button_bg_notblured));
                         buyDialog.show();
+
+                        final Button bConfirm = (Button) buyDialog.findViewById(R.id.bConfirm);
+                        Button bCancel  = (Button) buyDialog.findViewById(R.id.bCancel);
+
+                        bConfirm.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                getResponse res = new getResponse(context, Utils.STATE_BUY_TICKET);
+                                res.execute(Utils.ROUTE_BUY_TICKET, jsonBuy);
+                            }
+                        });
+
+                        bCancel.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                buyDialog.cancel();
+                            }
+                        });
+
 
                     }
                 });
@@ -231,7 +279,16 @@ public class TicketAdapter extends BaseAdapter{
                 holderResults.tv3.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        getResponse res = new getResponse(context, Utils.STATE_GET_SEATS);
+                        res.execute(Utils.ROUTE_GET_SEATS, result.get(position).getTripID(Utils.STATE_GET_SEATS));
                         seatsDialog.show();
+                    }
+                });
+
+                seatsDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        seatsTaken.clear();
                     }
                 });
 
@@ -242,10 +299,11 @@ public class TicketAdapter extends BaseAdapter{
                             seats.get(i).setBackgroundResource(R.drawable.freeseat);
                         }
                         int carriage = Integer.parseInt(spinner.getSelectedItem().toString());
-                        for(int j=0;j<takenseats.length;j++) {
+                        if(seatsTaken.isEmpty()){}else
+                        for(int j=0;j<seatsTaken.size();j++) {
                             for (int i = carriage * carriageCapacity; i > carriage * carriageCapacity - carriageCapacity; i--)
-                                if (takenseats[j] == i) {
-                                    int seatNo = takenseats[j];
+                                if (seatsTaken.get(j) == i) {
+                                    int seatNo = seatsTaken.get(j);
                                     while (seatNo > carriageCapacity)
                                         seatNo -= carriageCapacity;
                                     seats.get(seatNo - 1).setBackgroundResource(R.drawable.busyseat);
@@ -283,59 +341,126 @@ public class TicketAdapter extends BaseAdapter{
 
     }
 
-/*
-    private void saveImageToSD(Canvas canvas) {
+    public class getResponse extends AsyncTask<String, String, String> {
 
-    *//*--- this method will save your downloaded image to SD card ---*//*
+        HttpURLConnection urlConnection;
+        Context context;
+        int state;
 
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    *//*--- you can select your preferred CompressFormat and quality.
-     * I'm going to use JPEG and 100% quality ---*//*
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-    *//*--- create a new file on SD card ---*//*
-
-        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-                + File.separator + ticketID + ".jpg");
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    *//*--- create a new FileOutputStream and write bytes to file ---*//*
-        try {
-            fos = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        try {
-            fos.write(bytes.toByteArray());
-            fos.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        public getResponse(Context c, int s) {
+            context = c;
+            state = s;
         }
 
-    }*/
+        @Override
+        protected String doInBackground(String... args) {
+            if(args.length>0) {
+                boolean searchingSeats = args[0].equals(Utils.ROUTE_GET_SEATS);
+                if (searchingSeats) {
+                    StringBuilder result = new StringBuilder();
+                    try {
+                        URL url = new URL(args[0] + "/" + args[1]);
+                        Utils._(url.toString(),context);
+                        urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.setRequestProperty("Content-Type", "application/json");
+                        urlConnection.setRequestProperty("x-access-token", LoggedActivity.u.getToken());
 
-    public static Bitmap getBitmapFromURL(String link) {
-    /*--- this method downloads an Image from the given URL,
-     *  then decodes and returns a Bitmap object
-     ---*/
-        try {
-            URL url = new URL(link);
-            HttpURLConnection connection = (HttpURLConnection) url
-                    .openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
-            return myBitmap;
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("getBmpFromUrl error: ", e.getMessage().toString());
-            return null;
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        urlConnection.disconnect();
+                    }
+                    return result.toString();
+                } else {
+                    JSONObject response = null;
+
+                    try {
+                        URL url;
+
+                        url = new URL(args[0]);
+
+                        urlConnection = (HttpURLConnection) url.openConnection();
+                        urlConnection.setDoOutput(true);
+                        urlConnection.setDoInput(true);
+                        urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        urlConnection.setRequestMethod("POST");
+                        urlConnection.setRequestProperty("x-access-token", LoggedActivity.u.getToken());
+                        urlConnection.connect();
+
+                        OutputStreamWriter writer = new OutputStreamWriter(urlConnection.getOutputStream());
+
+                        String output = args[1];
+
+                        Utils._(output, context);
+                        writer.write(output);
+                        writer.flush();
+                        writer.close();
+
+                        InputStream input = urlConnection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                        StringBuilder result = new StringBuilder();
+                        String line;
+
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line);
+                        }
+                        response = new JSONObject(result.toString());
+
+                        Utils._(response.toString(), context);
+
+                    } catch (JSONException e) {
+                        //this.e = e;
+                    } catch (IOException e) {
+                        //this.e = e;
+                    } finally {
+                        urlConnection.disconnect();
+                    }
+                    if (response != null)
+                        return response.toString();
+                }
+            }
+            return "";
+        }
+
+        @Override
+        public void onPostExecute(String result) {
+            switch (state) {
+                case Utils.STATE_GET_SEATS:
+                    Utils._(result, context);
+                    result = result.replace("[","").replace("]","");
+                    if(result.equals("")) {
+                        seatsTaken.add(-1);
+                    }
+                    else
+                    {
+                        String[] aux = result.split(",");
+                        for(int i=0;i<aux.length;i++)
+                            seatsTaken.add(Integer.parseInt(aux[i]));
+                    }
+                    break;
+                case Utils.STATE_BUY_TICKET:
+                    Utils._(result, context);
+                    if(result.indexOf("Denied")>0) {
+                        Utils.toast("Invalid payment card.", context);
+                        break;
+                    }
+                    Utils.toast("Thank you for your purchase.", context);
+                    ((Activity)context).finish();
+
+
+                    break;
+                default:
+                    Utils._("Warning, unknown state!", context);
+            }
         }
     }
 

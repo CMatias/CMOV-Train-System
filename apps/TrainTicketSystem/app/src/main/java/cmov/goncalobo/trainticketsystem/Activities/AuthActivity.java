@@ -36,17 +36,14 @@ public class AuthActivity extends Activity {
     Context c;
 
     String data;
-    private String file = "mydata";
 
     EditText etUsername, etPassword;
     CheckBox cbRememberMe;
     TextView tvSignUp;
-    Button bLogin;
+    Button bLogin, bOffline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
 
         super.onCreate(savedInstanceState);
 
@@ -64,9 +61,10 @@ public class AuthActivity extends Activity {
         cbRememberMe = (CheckBox) findViewById(R.id.cbRememberMe);
 
         bLogin = (Button) findViewById(R.id.bLogin);
+        bOffline = (Button) findViewById(R.id.bOffline);
 
         try{
-            FileInputStream fin = openFileInput(file);
+            FileInputStream fin = openFileInput(Utils.REMEMBER_ME_FILE);
             int i;
             String temp="";
 
@@ -82,6 +80,35 @@ public class AuthActivity extends Activity {
         catch(Exception e){
         }
 
+        bOffline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    FileInputStream fin = openFileInput(Utils.OFFLINE_TICKETS_FILE);
+                    int i;
+                    String temp="";
+
+                    while( (i = fin.read()) != -1){
+                        temp = temp + Character.toString((char)i);
+                    }
+
+                    if(temp.equals(""))
+                        Utils.toast("You have no tickets stored offline.",c);
+                    else{
+                        Intent intent = new Intent(AuthActivity.this, MyTicketsActivity.class);
+                        Utils._(temp, c);
+                        intent.putExtra("tickets", temp);
+                        intent.putExtra("offline", "true");
+                        startActivity(intent);
+                    }
+
+
+                }
+                catch(Exception e){
+                }
+            }
+        });
+
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,7 +118,7 @@ public class AuthActivity extends Activity {
                     data=etUsername.getText().toString()+":"+etPassword.getText().toString();
 
                     try {
-                        FileOutputStream fOut = openFileOutput(file,MODE_WORLD_READABLE);
+                        FileOutputStream fOut = openFileOutput(Utils.REMEMBER_ME_FILE,MODE_WORLD_READABLE);
                         fOut.write(data.getBytes());
                         fOut.close();
                         Utils._("User Remembered.",c);
@@ -105,7 +132,7 @@ public class AuthActivity extends Activity {
                     data="";
 
                     try {
-                        FileOutputStream fOut = openFileOutput(file,MODE_WORLD_READABLE);
+                        FileOutputStream fOut = openFileOutput(Utils.REMEMBER_ME_FILE,MODE_WORLD_READABLE);
                         fOut.write(data.getBytes());
                         fOut.close();
                         Utils._("User forgotten.",c);
@@ -208,12 +235,12 @@ public class AuthActivity extends Activity {
                         Utils.toast("Please connect to the internet.", c);
                         return;
                     }
-                        int success = result.indexOf("success");
+                        int success = result.indexOf("true");
 
                         if (success>0) {
 
                             User u = new User();
-                            String token = result.replace("\"", "").replace("}", "");
+                            String token = result.replace("\"", "").replace("}", "").replace(",success:true", "");
                             token = token.substring(token.indexOf("token:") + 6, token.length());
                             u.setToken(token);
                             u.setUsername(username);

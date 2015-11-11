@@ -9,7 +9,7 @@ import android.widget.Toast;
 public class Utils {
 
     // CONFIGURATION
-    private static final boolean DEBUGGER = true;
+    private static final boolean DEBUGGER = false;
 
     // API ROUTES
     public static final String ROUTE_LOGIN      = "http://146.185.184.229:1337/api/passenger/authenticate";
@@ -18,6 +18,12 @@ public class Utils {
     public static final String ROUTE_FINDTRIPS  = "http://146.185.184.229:1337/api/trips";
     public static final String ROUTE_PROFILE    = "http://146.185.184.229:1337/api/passenger";
     public static final String ROUTE_ADDCARDS   = "http://146.185.184.229:1337/api/passenger/creditcards";
+    public static final String ROUTE_BUY_TICKET = "http://146.185.184.229:1337/api/tickets";
+    public static final String ROUTE_GET_SEATS  = "http://146.185.184.229:1337/api/trip/seats";
+
+    // INTERNAL STORAGE FILES
+    public static final  String REMEMBER_ME_FILE = "remember_me";
+    public static final  String OFFLINE_TICKETS_FILE = "offline_tickets";
 
 
     // STATES
@@ -28,7 +34,9 @@ public class Utils {
     public static final int STATE_SETTINGS       = 5;
     public static final int STATE_FIND_RESULTS   = 6;
     public static final int STATE_ADDCARD        = 7;
-    public static final int STATE_LOAD_PROFILE = 8;
+    public static final int STATE_LOAD_PROFILE   = 8;
+    public static final int STATE_BUY_TICKET     = 9;
+    public static final int STATE_GET_SEATS      = 10;
 
 
     // REGEX PATTERNS

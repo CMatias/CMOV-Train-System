@@ -51,7 +51,7 @@ public class PaymentCard implements Serializable {
 
     public String display(int state){
         switch (state){
-            case 1: return "T: "+getType()+"\nN: "+getNumber()+"\nVal: "+getValidity();
+            case 1: return "Type: "+getType()+"\nNo. "+getNumber()+"\nVal: "+getValidity().substring(0,getValidity().indexOf("T"));
             case 2:
             default: return "Error";
         }
