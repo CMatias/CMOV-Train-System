@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Ticket = require('../models/ticket');
 var tripController = require('./trip');
+//var inspectorController = require('../controllers/inspector');
 var creditCardVerifier = require('./creditcardservice');
-
 
 exports.getTickets = function(req, res) {
     Ticket
@@ -51,7 +51,7 @@ exports.postTicket = function(req, res) {
             ticket.price = parseFloat(req.body.price[0]);
             ticket._passenger = req.decoded._id;
             ticket._trips = req.body.trips;
-            ticket.signature = keyManager.getSign(ticket._id);
+            ticket.signature = keyManager.getSign(ticket._id.toString());
             ticket.save(function (err) {
                 if (err) {
                     res.send(err);
@@ -74,7 +74,7 @@ exports.postTicket = function(req, res) {
                 "trip": req.body.trips[1],
                 "waitingtime": req.body.waitingtime
             };
-            ticket.signature = keyManager.getSign(ticket._id);
+            ticket.signature = keyManager.getSign(ticket._id.toString());
             ticket.save(function (err) {
                 if (err) {
                     res.send(err);
@@ -97,15 +97,18 @@ exports.putTripInfo = function(req, res) {
             if (err) {
                 res.send(err);
             }
-            ticket.used = true;
-            ticket.save(function(err) {
-                if (err) {
-                    res.send(err);
-                }
-            })
+            if(ticket) {
+                ticket.used = true;
+                ticket.save(function (err) {
+                    if (err) {
+                        res.send(err);
+                    }
+                })
+            }
         })
     }
-    res.json("Uploaded Trip Info");
+    //inspectorController.removeTrip(req.decoded._id, req.body.tripid);
+    res.json('Uploaded Trip Info.');
 };
 
 exports.getTripSeats = function(req, res) {
