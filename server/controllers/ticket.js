@@ -6,8 +6,7 @@ var creditCardVerifier = require('./creditcardservice');
 exports.getTickets = function(req, res) {
     Ticket
         .find({
-            "_passenger" : req.decoded._id,
-            "used": false
+            "_passenger" : req.decoded._id
         })
         .populate([{path:'_trips'}, {path:'_passenger'}])
         .exec(function (err, tickets) {
