@@ -60,8 +60,12 @@ exports.getPublicKey = function(req, res){
     var keyManager =  require('./keymanager');
     var publicKey = keyManager.getKeyPair().public;
 
+    res.json(keyManager.getKeyPair());
+
+    /*
     var firstIndex = publicKey.indexOf('\n');
     var lastIndex = publicKey.lastIndexOf('\n');
 
     res.json(publicKey.substring(firstIndex+1, lastIndex));
+    */
 };
