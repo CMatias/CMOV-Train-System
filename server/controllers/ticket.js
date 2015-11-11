@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Ticket = require('../models/ticket');
 var tripController = require('./trip');
-//var inspectorController = require('../controllers/inspector');
 var creditCardVerifier = require('./creditcardservice');
 
 exports.getTickets = function(req, res) {
@@ -107,7 +106,6 @@ exports.putTripInfo = function(req, res) {
             }
         })
     }
-    //inspectorController.removeTrip(req.decoded._id, req.body.tripid);
     res.json('Uploaded Trip Info.');
 };
 
