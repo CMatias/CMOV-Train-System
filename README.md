@@ -14,5 +14,4 @@ The server was developed in Node.js and is responsible for feeding all the infor
 * Purchase tickets
 * Choose a seat on the train
 
-More info can be found on the [assignment pdf](https://github.com/CMatias/CMOV-Train-System/repo/blob/branch/master/assignment.pdf
-).
+More info can be found on the [assignment pdf](https://github.com/CMatias/CMOV-Train-System/blob/master/assignment.pdf).
